@@ -1,0 +1,14 @@
+<svg aria-hidden="true" style="position:absolute;width:0;height:0" xmlns="http://www.w3.org/2000/svg" overflow="hidden">
+    <defs>
+        <symbol id="star" width="22" height="20" viewBox="0 0 22 20" fill="none">
+            <path d="M12.9941 7.75488L13.1064 8.10059H19.9229L14.7021 11.8936L14.4082 12.1074L14.5205 12.4531L16.5146 18.5898L11.2939 14.7969L11 14.584L10.7061 14.7969L5.48438 18.5898L7.47949 12.4531L7.5918 12.1074L7.29785 11.8936L2.07715 8.10059H8.89355L9.00586 7.75488L11 1.61719L12.9941 7.75488Z" stroke="#7E8691"/>
+        </symbol>
+        <symbol id="location" width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <circle cx="11" cy="11" r="8" stroke="#AEB3B9" stroke-width="2"/>
+            <rect x="10" width="2" height="4" fill="#AEB3B9"/>
+            <rect x="10" y="18" width="2" height="4" fill="#AEB3B9"/>
+            <rect x="4" y="10" width="2" height="4" transform="rotate(90 4 10)" fill="#AEB3B9"/>
+            <rect x="22" y="10" width="2" height="4" transform="rotate(90 22 10)" fill="#AEB3B9"/>
+        </symbol>
+    </defs>
+</svg>

@@ -9,26 +9,31 @@
   <script type="module" crossorigin src="/weather-app/index.js"></script>
   <link rel="modulepreload" crossorigin href="/weather-app/assets/vendor-I1I71QQ2.js">
   <link rel="stylesheet" crossorigin href="/weather-app/assets/vendor-DnveWo0P.css">
-  <link rel="stylesheet" crossorigin href="/weather-app/assets/index-CTCMVJpn.css">
+  <link rel="stylesheet" crossorigin href="/weather-app/assets/index--ynOp9LJ.css">
 </head>
 
 <body>
 
   <div class="weather-app">
     <div class="search-bar">
-      <input type="text" id="city-input" placeholder="Введіть місто">
+      <svg class="lucide lucide-location" width="22" height="22">
+        <use href="/weather-app/assets/icons-e00099LT.svg#location"></use>
+      </svg>
+      <input type="text" id="city-input" placeholder="Enter the city">
       <button id="add-city-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          class="lucide lucide-star">
-          <polygon
-            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        <svg class="lucide lucide-star" width="22" height="20">
+          <use href="/weather-app/assets/icons-e00099LT.svg#star"></use>
         </svg>
       </button>
     </div>
     <div class="city-tags" id="city-tags-container">
       <!-- Міста будуть додані тут -->
     </div>
+    <button class="city-tags-toggle" id="city-tags-toggle" aria-label="Показать все города" style="display:none;">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <path d="M7 10l5 5 5-5" />
+      </svg>
+    </button>
 
     <div class="weather-display">
       <div class="current-weather">
@@ -101,7 +106,7 @@
     <div class="romb"></div>
 
     <!-- Loader element -->
-    <div id="loader" class="loader">Завантаження</div>
+    <div id="loader" class="loader"></div>
   </div>
 </body>
 
