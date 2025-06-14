@@ -6,98 +6,98 @@ import {
   showNotification,
 } from './js/render-functions.js';
 
-// Элементы DOM
+// Елементи DOM
 const cityInput = document.getElementById('city-input');
 const addCityButton = document.getElementById('add-city-button');
 const timeElement = document.querySelector('.date-time-info .time');
 const todayTabButton = document.getElementById('today-tab');
 const fiveDaysTabButton = document.getElementById('5-days-tab');
-const loaderElement = document.getElementById('loader'); // Получаем элемент загрузчика
+const loaderElement = document.getElementById('loader'); // Отримуємо елемент завантажувача
 
-// Массив для хранения добавленных городов
+// Масив для зберігання доданих міст
 let cities = JSON.parse(localStorage.getItem('weatherCities')) || ['Kyiv'];
-let currentCity = cities[0] || 'Kyiv'; // Текущий отображаемый город
+let currentCity = cities[0] || 'Kyiv'; // Поточне відображуване місто
 
 /**
- * Показывает индикатор загрузки.
+ * Показує індикатор завантаження.
  */
 function showLoader() {
   loaderElement.style.display = 'block';
 }
 
 /**
- * Скрывает индикатор загрузки.
+ * Ховає індикатор завантаження.
  */
 function hideLoader() {
   loaderElement.style.display = 'none';
 }
 
 /**
- * Функция для добавления нового города в список и обновления тегов.
+ * Функція для додавання нового міста до списку та оновлення тегів.
  */
 function addCity() {
   const newCity = cityInput.value.trim();
 
   if (!newCity) {
-    showNotification('Поле ввода города не может быть пустым.', 'error');
+    showNotification('Поле вводу міста не може бути порожнім.', 'error');
     return;
   }
 
-  // Проверка на наличие только пробелов
+  // Перевірка на наявність лише пробілів
   if (newCity.split(' ').join('') === '') {
     showNotification(
-      'Название города не может состоять только из пробелов.',
+      'Назва міста не може складатися лише з пробілів.',
       'error'
     );
     return;
   }
 
   if (cities.some(city => city.toLowerCase() === newCity.toLowerCase())) {
-    showNotification('Этот город уже добавлен.', 'warning');
+    showNotification('Це місто вже додано.', 'warning');
     cityInput.value = '';
     return;
   }
 
-  showLoader(); // Показываем загрузчик перед запросом
-  // Проверяем, существует ли город, прежде чем добавлять его
+  showLoader(); // Показуємо завантажувач перед запитом
+  // Перевіряємо, чи існує місто, перш ніж додавати його
   getWeatherData(newCity)
     .then(data => {
       if (data) {
         cities.push(newCity);
         localStorage.setItem('weatherCities', JSON.stringify(cities));
         renderCityTags(cities, handleCityClick, handleCityRemove);
-        cityInput.value = ''; // Очистить поле ввода
-        currentCity = newCity; // Сделать новый город текущим
-        fetchAndDisplayWeather(currentCity); // Отобразить погоду для нового города
-        showNotification(`Город "${newCity}" успешно добавлен.`, 'success');
+        cityInput.value = ''; // Очистити поле вводу
+        currentCity = newCity; // Зробити нове місто поточним
+        fetchAndDisplayWeather(currentCity); // Відобразити погоду для нового міста
+        showNotification(`Місто "${newCity}" успішно додано.`, 'success');
       } else {
-        // Если getWeatherData вернул null (из-за ошибки сети или 404),
-        // сообщение об ошибке уже будет показано из getWeatherData,
-        // поэтому здесь не нужно дублировать.
+        // Якщо getWeatherData повернув null (через помилку мережі або 404),
+        // повідомлення про помилку вже буде показано з getWeatherData,
+        // тому тут не потрібно дублювати.
       }
     })
     .catch(error => {
-      // Обработка ошибок, которые были переброшены из getWeatherData
+      // Обробка помилок, які були перекинуті з getWeatherData
       if (error.message.includes('City not found')) {
         showNotification(
-          `Город "${newCity}" не найден. Пожалуйста, проверьте название.`,
+          `Місто "${newCity}" не знайдено. Будь ласка, перевірте назву.`,
           'error'
         );
       } else {
         showNotification(
-          `Произошла ошибка при добавлении города: ${error.message}`,
+          `Сталася помилка під час додавання міста: ${error.message}`,
           'error'
         );
       }
     })
     .finally(() => {
-      hideLoader(); // Скрываем загрузчик после завершения запроса
+      hideLoader(); // Ховаємо завантажувач після завершення запиту
     });
 }
 
 /**
- * Функция для удаления города из списка и обновления тегов.
- * @param {string} cityToRemove - Город, который нужно удалить.
+ * Функція для видалення міста зі списку та оновлення тегів.
+ * @param {string} cityToRemove - Місто, яке потрібно видалити.
  */
 function handleCityRemove(cityToRemove) {
   cities = cities.filter(
@@ -105,11 +105,11 @@ function handleCityRemove(cityToRemove) {
   );
   localStorage.setItem('weatherCities', JSON.stringify(cities));
   renderCityTags(cities, handleCityClick, handleCityRemove);
-  showNotification(`Город "${cityToRemove}" удален.`, 'info');
+  showNotification(`Місто "${cityToRemove}" видалено.`, 'info');
 
-  // Если удалили текущий город, переключаемся на первый в списке (если есть)
+  // Якщо видалили поточне місто, переключаємося на перше у списку (якщо є)
   if (currentCity.toLowerCase() === cityToRemove.toLowerCase()) {
-    currentCity = cities.length > 0 ? cities[0] : 'Kyiv'; // Возвращаемся к 'Kyiv' если нет других городов
+    currentCity = cities.length > 0 ? cities[0] : 'Kyiv'; // Повертаємося до 'Kyiv', якщо немає інших міст
     fetchAndDisplayWeather(currentCity);
   }
   if (cities.length === 0 && currentCity === 'Kyiv') {
@@ -118,35 +118,35 @@ function handleCityRemove(cityToRemove) {
 }
 
 /**
- * Функция для обработки клика по тегу города.
- * @param {string} city - Город, на который кликнули.
+ * Функція для обробки кліку по тегу міста.
+ * @param {string} city - Місто, на яке клікнули.
  */
 function handleCityClick(city) {
   currentCity = city;
   fetchAndDisplayWeather(city);
-  showNotification(`Отображается погода для города: ${city}`, 'info');
+  showNotification(`Відображається погода для міста: ${city}`, 'info');
 }
 
 /**
- * Асинхронная функция для получения и отображения данных о погоде.
- * @param {string} city - Город для запроса.
+ * Асинхронна функція для отримання та відображення даних про погоду.
+ * @param {string} city - Місто для запиту.
  */
 async function fetchAndDisplayWeather(city) {
-  showLoader(); // Показываем загрузчик перед запросом
+  showLoader(); // Показуємо завантажувач перед запитом
   try {
     const weatherData = await getWeatherData(city);
     if (weatherData) {
       updateWeatherUI(weatherData, city);
     }
   } catch (error) {
-    // Ошибки уже обработаны в getWeatherData и показаны через iziToast
-    // Здесь можно добавить дополнительную логику, если необходимо
+    // Помилки вже оброблені в getWeatherData та показані через iziToast
+    // Тут можна додати додаткову логіку, якщо необхідно
   } finally {
-    hideLoader(); // Скрываем загрузчик после завершения запроса (успешно или с ошибкой)
+    hideLoader(); // Ховаємо завантажувач після завершення запиту (успішно або з помилкою)
   }
 }
 
-// Обработчики событий
+// Обробники подій
 addCityButton.addEventListener('click', addCity);
 cityInput.addEventListener('keypress', e => {
   if (e.key === 'Enter') {
@@ -157,29 +157,30 @@ cityInput.addEventListener('keypress', e => {
 todayTabButton.addEventListener('click', () => {
   todayTabButton.classList.add('active');
   fiveDaysTabButton.classList.remove('active');
-  showNotification('Отображаются текущие данные о погоде.', 'info');
-  // Здесь будет логика для отображения данных "Сегодня"
-  // (сейчас всегда отображается текущая погода)
+  showNotification('Відображаються поточні дані про погоду.', 'info');
+  // Тут буде логіка для відображення даних "Сьогодні"
+  // (зараз завжди відображається поточна погода)
 });
 
 fiveDaysTabButton.addEventListener('click', () => {
   fiveDaysTabButton.classList.add('active');
   todayTabButton.classList.remove('active');
   showNotification(
-    'Прогноз на 5 дней пока не реализован. Эта функция будет добавлена позже!',
+    'Прогноз на 5 днів поки не реалізований. Ця функція буде додана пізніше!',
     'warning'
   );
-  // Здесь будет логика для отображения прогноза на 5 дней
+  // Тут буде логіка для відображення прогнозу на 5 днів
 });
 
-// Инициализация при загрузке страницы
+// Ініціалізація при завантаженні сторінки
 document.addEventListener('DOMContentLoaded', () => {
   renderCityTags(cities, handleCityClick, handleCityRemove);
   fetchAndDisplayWeather(currentCity);
-  // Обновляем время каждую секунду для демонстрации
+  updateQuoteDisplay(); // Викликаємо відображення цитати при завантаженні сторінки
+  // Оновлюємо час щосекунди для демонстрації
   setInterval(() => {
     const now = new Date();
-    const formattedTime = now.toLocaleTimeString('ru-RU', {
+    const formattedTime = now.toLocaleTimeString('uk-UA', {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
