@@ -9,7 +9,7 @@ const OPENWEATHER_BASE_URL = 'https://api.openweathermap.org/data/2.5/';
 export async function getWeatherData(city) {
   try {
     const response = await fetch(
-      `${OPENWEATHER_BASE_URL}weather?q=${city}&appid=${OPENWEATHER_API_KEY}&units=metric&lang=ru`
+      `${OPENWEATHER_BASE_URL}weather?q=${city}&appid=${OPENWEATHER_API_KEY}&units=metric`
     );
     if (!response.ok) {
       // Проверяем статус ответа для более конкретной ошибки

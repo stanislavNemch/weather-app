@@ -4,6 +4,7 @@ import {
   updateWeatherUI,
   renderCityTags,
   showNotification,
+  updateQuoteDisplay,
 } from './js/render-functions.js';
 
 // Елементи DOM
