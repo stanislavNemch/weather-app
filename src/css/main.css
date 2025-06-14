@@ -38,7 +38,6 @@ body {
 }
 
 /* Стилі для лоадера (з https://github.com/vineethtrv/css-loader) */
-/* Loader styles */
 .loader {
   font-size: 48px;
   color: #fff;

@@ -70,7 +70,7 @@ function addCity() {
         cityInput.value = ''; // Очистити поле вводу
         currentCity = newCity; // Зробити нове місто поточним
         fetchAndDisplayWeather(currentCity); // Відобразити погоду для нового міста
-        showNotification(`Місто "${newCity}" успішно додано.`, 'success');
+        // showNotification(`Місто "${newCity}" успішно додано.`, 'success');
       } else {
         // Якщо getWeatherData повернув null (через помилку мережі або 404),
         // повідомлення про помилку вже буде показано з getWeatherData,
@@ -106,7 +106,7 @@ function handleCityRemove(cityToRemove) {
   );
   localStorage.setItem('weatherCities', JSON.stringify(cities));
   renderCityTags(cities, handleCityClick, handleCityRemove);
-  showNotification(`Місто "${cityToRemove}" видалено.`, 'info');
+  //showNotification(`Місто "${cityToRemove}" видалено.`, 'info');
 
   // Якщо видалили поточне місто, переключаємося на перше у списку (якщо є)
   if (currentCity.toLowerCase() === cityToRemove.toLowerCase()) {
@@ -125,7 +125,7 @@ function handleCityRemove(cityToRemove) {
 function handleCityClick(city) {
   currentCity = city;
   fetchAndDisplayWeather(city);
-  showNotification(`Відображається погода для міста: ${city}`, 'info');
+  //showNotification(`Відображається погода для міста: ${city}`, 'info');
 }
 
 /**

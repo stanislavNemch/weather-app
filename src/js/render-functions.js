@@ -167,6 +167,37 @@ export function renderCityTags(cities, onCityClick, onCityRemove) {
     tag.appendChild(closeButton);
     cityTagsContainer.appendChild(tag);
   });
+  // Управление стрелкой и раскрытием
+  const cityTagsToggle = document.getElementById('city-tags-toggle');
+  if (cityTagsToggle) {
+    if (cities.length > 4) {
+      cityTagsToggle.style.display = 'flex';
+    } else {
+      cityTagsToggle.style.display = 'none';
+      cityTagsContainer.classList.remove('expanded');
+    }
+    cityTagsToggle.onclick = () => {
+      cityTagsContainer.classList.toggle('expanded');
+    };
+  }
+}
+
+/**
+ * Управляет отображением стрелки и раскрытием списка городов.
+ * @param {Array<string>} cities - Массив городов.
+ */
+export function updateCityTagsToggle(cities) {
+  const cityTagsToggle = document.getElementById('city-tags-toggle');
+  if (!cityTagsToggle) return;
+  if (cities.length > 4) {
+    cityTagsToggle.style.display = 'flex';
+  } else {
+    cityTagsToggle.style.display = 'none';
+    cityTagsContainer.classList.remove('expanded');
+  }
+  cityTagsToggle.onclick = () => {
+    cityTagsContainer.classList.toggle('expanded');
+  };
 }
 
 /**
