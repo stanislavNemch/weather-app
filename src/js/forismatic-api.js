@@ -1,3 +1,4 @@
+const PROXY_URL = 'https://corsproxy.io/?';
 const FORISMATIC_API_URL = 'https://api.forismatic.com/api/1.0/';
 
 /**
@@ -7,17 +8,18 @@ const FORISMATIC_API_URL = 'https://api.forismatic.com/api/1.0/';
  */
 export async function getRandomQuote() {
   try {
-    const response = await fetch(FORISMATIC_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        method: 'getQuote',
-        format: 'json',
-        lang: 'en', // Указываем язык английский
-      }),
-    });
+    const response = await fetch(
+      PROXY_URL + encodeURIComponent(FORISMATIC_API_URL),
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          method: 'getQuote',
+          format: 'json',
+          lang: 'en',
+        }),
+      }
+    );
 
     // Forismatic API может возвращать 200 OK даже с пустым ответом,
     // если запрос был некорректен или нет цитат.
