@@ -14,10 +14,25 @@ const addCityButton = document.getElementById('add-city-button');
 const timeElement = document.querySelector('.date-time-info .time');
 const todayTabButton = document.getElementById('today-tab');
 const fiveDaysTabButton = document.getElementById('5-days-tab');
+const loaderElement = document.getElementById('loader'); // Получаем элемент загрузчика
 
 // Массив для хранения добавленных городов
 let cities = JSON.parse(localStorage.getItem('weatherCities')) || ['Kyiv'];
 let currentCity = cities[0] || 'Kyiv'; // Текущий отображаемый город
+
+/**
+ * Показывает индикатор загрузки.
+ */
+function showLoader() {
+  loaderElement.style.display = 'block';
+}
+
+/**
+ * Скрывает индикатор загрузки.
+ */
+function hideLoader() {
+  loaderElement.style.display = 'none';
+}
 
 /**
  * Функция для добавления нового города в список и обновления тегов.
@@ -45,6 +60,7 @@ function addCity() {
     return;
   }
 
+  showLoader(); // Показываем загрузчик перед запросом
   // Проверяем, существует ли город, прежде чем добавлять его
   getWeatherData(newCity)
     .then(data => {
@@ -75,6 +91,9 @@ function addCity() {
           'error'
         );
       }
+    })
+    .finally(() => {
+      hideLoader(); // Скрываем загрузчик после завершения запроса
     });
 }
 
@@ -115,6 +134,7 @@ function handleCityClick(city) {
  * @param {string} city - Город для запроса.
  */
 async function fetchAndDisplayWeather(city) {
+  showLoader(); // Показываем загрузчик перед запросом
   try {
     const weatherData = await getWeatherData(city);
     if (weatherData) {
@@ -123,6 +143,8 @@ async function fetchAndDisplayWeather(city) {
   } catch (error) {
     // Ошибки уже обработаны в getWeatherData и показаны через iziToast
     // Здесь можно добавить дополнительную логику, если необходимо
+  } finally {
+    hideLoader(); // Скрываем загрузчик после завершения запроса (успешно или с ошибкой)
   }
 }
 
