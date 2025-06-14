@@ -1,5 +1,3 @@
-// main.js
-
 // Импортируем функции из других модулей
 import { getWeatherData } from './js/openweathermap-api.js';
 import {
