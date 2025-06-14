@@ -10,5 +10,9 @@
             <rect x="4" y="10" width="2" height="4" transform="rotate(90 4 10)" fill="#AEB3B9"/>
             <rect x="22" y="10" width="2" height="4" transform="rotate(90 22 10)" fill="#AEB3B9"/>
         </symbol>
+        <symbol id="arrow-left" width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="14" fill="white" fill-opacity="0.2" />
+            <path d="M12 11L16 15L12 19" stroke-width="1.5" fill="black" />
+        </symbol>
     </defs>
 </svg>
