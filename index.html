@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link href="/weather-app/assets/favicon-DUzivux-.ico" rel="icon" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
+  <script type="module" crossorigin src="/weather-app/index.js"></script>
+  <link rel="modulepreload" crossorigin href="/weather-app/assets/vendor-I1I71QQ2.js">
+  <link rel="stylesheet" crossorigin href="/weather-app/assets/vendor-DnveWo0P.css">
+  <link rel="stylesheet" crossorigin href="/weather-app/assets/index-BZdALArq.css">
+</head>
+
+<body>
+
+  <div class="weather-app">
+    <div class="search-bar">
+      <input type="text" id="city-input" placeholder="Введите город">
+      <button id="add-city-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-star">
+          <polygon
+            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      </button>
+    </div>
+    <div class="city-tags" id="city-tags-container">
+      <!-- Города будут добавлены здесь -->
+    </div>
+
+    <div class="weather-display">
+      <div class="current-weather">
+        <div class="location">Kyiv, UA</div>
+        <div class="temperature">-3°</div>
+        <div class="min-max">
+          <span class="min-temp">мин -2°</span>
+          <span class="max-temp">макс 1°</span>
+        </div>
+        <div class="weather-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-cloud">
+            <path d="M17.5 19H17a4.5 4.5 0 1 0 0-9h-.03a8 8 0 1 0-7.85 9"></path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="forecast-tabs">
+        <button class="tab-button active" id="today-tab">Сегодня</button>
+        <button class="tab-button" id="5-days-tab">5 дней</button>
+      </div>
+
+      <div class="date-time-info">
+        <div class="date">8-е Суббота</div>
+        <div class="month">Февраль</div>
+        <div class="time">21:30:56</div>
+        <div class="sun-times">
+          <span class="sunrise">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-sun">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="M4.93 4.93l1.41 1.41"></path>
+              <path d="M17.66 17.66l1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="M4.93 19.07l1.41-1.41"></path>
+              <path d="M17.66 6.34l1.41-1.41"></path>
+            </svg>
+            07:04
+          </span>
+          <span class="sunset">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-sun">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="M4.93 4.93l1.41 1.41"></path>
+              <path d="M17.66 17.66l1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="M4.93 19.07l1.41-1.41"></path>
+              <path d="M17.66 6.34l1.41-1.41"></path>
+            </svg>
+            17:05
+          </span>
+        </div>
+      </div>
+
+      <div class="quote">
+        <p>"Who cares about the clouds when we're together? Just sing a song and bring the sunny weather."</p>
+        <p class="author">Dale Evans</p>
+      </div>
+    </div>
+
+    <div class="romb"></div>
+  </div>
+</body>
+
+</html>
