@@ -1,0 +1,38 @@
+/* Подключение шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+:root {
+    --font-family: "Lato", sans-serif;
+    --primary-bg-color: #f1f2f7;
+    --dark-blue: #2c3e50; /* Темно-синий для карточек */
+    --text-light: #ffffff;
+    --text-dark: #333333;
+    --border-color: rgba(255, 255, 255, 0.15);
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #eee;
+    overflow: hidden; /* Предотвращаем прокрутку */
+    color: var(--text-dark);
+    position: relative;
+}
+
+.weather-app {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Используем vh для мобильных */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: background-image 0.5s ease-in-out;
+}
