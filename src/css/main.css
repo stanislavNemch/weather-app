@@ -39,16 +39,16 @@ body {
 
 /* Стилі для лоадера (з https://github.com/vineethtrv/css-loader) */
 .loader {
-  position: absolute; /* Position it absolutely within .weather-app */
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000; /* Ensure it's above other content */
+  z-index: 1000;
   width: 60px;
   height: 60px;
   border-radius: 50%;
   animation: rotate 1s linear infinite;
-  display: none; /* Hidden by default */
+  display: none;
 }
 .loader::before,
 .loader::after {

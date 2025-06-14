@@ -47,20 +47,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  align-items: flex-end;
+  align-items: center;
   justify-content: flex-start;
   max-height: 48px; /* высота для 1 строки */
-  overflow: hidden;
   position: relative;
   transition: max-height 0.3s;
   margin-bottom: 4px;
 }
 
 .city-tags.expanded {
-  max-height: none;
-  overflow-x: auto;
-  flex-wrap: nowrap;
-  white-space: nowrap;
+  flex-wrap: wrap;
 }
 
 .city-tag {
@@ -88,14 +84,20 @@
   background: none;
   border: none;
   cursor: pointer;
-  position: absolute;
-  left: 0;
-  bottom: -28px;
-  z-index: 2;
-  padding: 0;
+  padding: 0 0 0 8px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  height: 32px; /* подберите под размер ваших тегов */
+  margin-left: 4px;
+  position: static; /* уберите absolute */
+}
+
+.arrow-left {
+  width: 28px;
+  height: 28px;
+  background: rgba(16, 33, 54, 0.5);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
 }
 
 .weather-display {

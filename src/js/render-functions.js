@@ -149,8 +149,19 @@ export async function updateBackground(query) {
  * @param {Function} onCityRemove - Функція-колбек при видаленні міста.
  */
 export function renderCityTags(cities, onCityClick, onCityRemove) {
-  cityTagsContainer.innerHTML = ''; // Очистити існуючі теги
-  cities.forEach(city => {
+  const cityTagsContainer = document.getElementById('city-tags-container');
+  const cityTagsToggle = document.getElementById('city-tags-toggle');
+
+  // Удаляем только старые города, не трогая кнопку
+  Array.from(cityTagsContainer.querySelectorAll('.city-tag')).forEach(tag =>
+    tag.remove()
+  );
+
+  const expanded = cityTagsContainer.classList.contains('expanded');
+  const visibleCities =
+    !expanded && cities.length > 4 ? cities.slice(0, 4) : cities;
+
+  visibleCities.forEach(city => {
     const tag = document.createElement('span');
     tag.classList.add('city-tag');
     tag.textContent = city;
@@ -160,25 +171,26 @@ export function renderCityTags(cities, onCityClick, onCityRemove) {
     closeButton.classList.add('close-tag');
     closeButton.textContent = 'x';
     closeButton.addEventListener('click', e => {
-      e.stopPropagation(); // Запобігти спрацьовуванню обробника на тезі
+      e.stopPropagation();
       onCityRemove(city);
     });
 
     tag.appendChild(closeButton);
-    cityTagsContainer.appendChild(tag);
+    cityTagsContainer.insertBefore(tag, cityTagsToggle); // Вставляем перед стрелкой
   });
-  // Управление стрелкой и раскрытием
-  const cityTagsToggle = document.getElementById('city-tags-toggle');
+
+  // Управление стрелкой
   if (cityTagsToggle) {
     if (cities.length > 4) {
       cityTagsToggle.style.display = 'flex';
+      cityTagsToggle.onclick = () => {
+        cityTagsContainer.classList.toggle('expanded');
+        renderCityTags(cities, onCityClick, onCityRemove);
+      };
     } else {
       cityTagsToggle.style.display = 'none';
       cityTagsContainer.classList.remove('expanded');
     }
-    cityTagsToggle.onclick = () => {
-      cityTagsContainer.classList.toggle('expanded');
-    };
   }
 }
 
