@@ -40,7 +40,7 @@ body {
 /* Стилі для лоадера (з https://github.com/vineethtrv/css-loader) */
 .loader {
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;

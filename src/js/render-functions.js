@@ -169,7 +169,11 @@ export function renderCityTags(cities, onCityClick, onCityRemove) {
 
     const closeButton = document.createElement('span');
     closeButton.classList.add('close-tag');
-    closeButton.textContent = 'x';
+    closeButton.innerHTML = `
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L11 11M1 11L11 1" stroke="white" stroke-opacity="0.5" stroke-width="1.5" />
+        </svg>
+        `;
     closeButton.addEventListener('click', e => {
       e.stopPropagation();
       onCityRemove(city);
