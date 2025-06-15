@@ -9,7 +9,7 @@
   <script type="module" crossorigin src="/weather-app/index.js"></script>
   <link rel="modulepreload" crossorigin href="/weather-app/assets/vendor-I1I71QQ2.js">
   <link rel="stylesheet" crossorigin href="/weather-app/assets/vendor-DnveWo0P.css">
-  <link rel="stylesheet" crossorigin href="/weather-app/assets/index-BUUhcNQk.css">
+  <link rel="stylesheet" crossorigin href="/weather-app/assets/index-XJLGOHEl.css">
 </head>
 
 <body>
@@ -18,12 +18,12 @@
     <div class="header-search">
       <div class="search-bar">
         <svg class="lucide lucide-location" width="22" height="22">
-          <use href="/weather-app/assets/icons-O5J1NvYn.svg#location"></use>
+          <use href="/weather-app/assets/icons-7b-vg5kA.svg#location"></use>
         </svg>
         <input type="text" id="city-input" placeholder="Enter the city">
         <button id="add-city-button">
           <svg class="lucide lucide-star" width="22" height="20">
-            <use href="/weather-app/assets/icons-O5J1NvYn.svg#star"></use>
+            <use href="/weather-app/assets/icons-7b-vg5kA.svg#star"></use>
           </svg>
         </button>
       </div>
@@ -31,7 +31,7 @@
         <!-- Міста будуть додані тут -->
         <button class="city-tags-toggle" id="city-tags-toggle" aria-label="Показать все города" style="display:none;">
           <svg class="arrow-left" width="28" height="28">
-            <use href="/weather-app/assets/icons-O5J1NvYn.svg#arrow-left"></use>
+            <use href="/weather-app/assets/icons-7b-vg5kA.svg#arrow-left"></use>
           </svg>
         </button>
       </div>
@@ -50,7 +50,7 @@
           </div>
           <span class="minmax-divider">
             <svg width="1" height="40">
-              <use href="/weather-app/assets/icons-O5J1NvYn.svg#vertical-line"></use>
+              <use href="/weather-app/assets/icons-7b-vg5kA.svg#vertical-line"></use>
             </svg>
           </span>
           <div class="max-col">
@@ -68,7 +68,8 @@
 
     <div class="date-time-info">
       <div class="date">
-        8<sup>th</sup> <span class="day-of-week">Sat</span>
+        <span class="date-number">8<sup>th</sup></span>
+        <span class="day-of-week">Sat</span>
       </div>
       <div class="month-time-container">
         <div class="month">February</div>
@@ -76,32 +77,14 @@
       </div>
       <div class="sun-times">
         <span class="sunrise">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2"></path>
-            <path d="M12 20v2"></path>
-            <path d="M4.93 4.93l1.41 1.41"></path>
-            <path d="M17.66 17.66l1.41 1.41"></path>
-            <path d="M2 12h2"></path>
-            <path d="M20 12h2"></path>
-            <path d="M4.93 19.07l1.41-1.41"></path>
-            <path d="M17.66 6.34l1.41-1.41"></path>
+          <svg width="24" height="24">
+            <use href="/weather-app/assets/icons-7b-vg5kA.svg#sunrise"></use>
           </svg>
           07:04
         </span>
         <span class="sunset">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2"></path>
-            <path d="M12 20v2"></path>
-            <path d="M4.93 4.93l1.41 1.41"></path>
-            <path d="M17.66 17.66l1.41 1.41"></path>
-            <path d="M2 12h2"></path>
-            <path d="M20 12h2"></path>
-            <path d="M4.93 19.07l1.41-1.41"></path>
-            <path d="M17.66 6.34l1.41-1.41"></path>
+          <svg width="24" height="24">
+            <use href="../img/icons.svg#sunset"></use>
           </svg>
           17:05
         </span>
