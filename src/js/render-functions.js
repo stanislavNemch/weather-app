@@ -6,7 +6,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 import { getRandomQuote } from './forismatic-api.js';
 
 // Елементи DOM, необхідні для рендерингу
-const weatherApp = document.querySelector('.weather-app');
+//const weatherApp = document.querySelector('.weather-app');
 const locationElement = document.querySelector('.current-weather .location');
 const temperatureElement = document.querySelector(
   '.current-weather .temperature'
@@ -24,59 +24,32 @@ const sunsetElement = document.querySelector('.sun-times .sunset');
 const quoteTextElement = document.getElementById('quote-text');
 const quoteAuthorElement = document.getElementById('quote-author');
 
-/**
- * Генерує SVG-код для іконки погоди на основі коду іконки OpenWeatherMap.
- * @param {string} iconCode - Код іконки OpenWeatherMap (наприклад, "01d", "04n").
- * @returns {string} SVG-код іконки.
- */
-function getWeatherIconSvg(iconCode) {
-  let svgPath = '';
-  // Вы можете додати більше умов для різних іконок
-  switch (iconCode) {
-    case '01d': // Ясне небо (день)
-      svgPath =
-        '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M4.93 19.07l1.41-1.41"/><path d="M17.66 6.34l1.41-1.41"/></svg>';
-      break;
-    case '01n': // Ясне небо (ніч)
-      svgPath =
-        '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
-      break;
-    case '02d': // Декілька хмар (день)
-    case '02n': // Декілька хмар (ніч)
-    case '03d': // Розсіяні хмари (день)
-    case '03n': // Розсіяні хмари (ніч)
-    case '04d': // Хмарно (день)
-    case '04n': // Хмарно (ніч)
-      svgPath =
-        '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud"><path d="M17.5 19H17a4.5 4.5 0 1 0 0-9h-.03a8 8 0 1 0-7.85 9"/></svg>';
-      break;
-    case '09d': // Злива (день)
-    case '09n': // Злива (ніч)
-    case '10d': // Дощ (день)
-    case '10n': // Дощ (ніч)
-      svgPath =
-        '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-rain"><path d="M17.5 19H17a4.5 4.5 0 1 0 0-9h-.03a8 8 0 1 0-7.85 9"/><path d="M2 13v0a1 1 0 0 0 1 1h1"/><path d="M16 13v0a1 1 0 0 0 1 1h1"/><path d="M8 13v0a1 1 0 0 0 1 1h1"/></svg>';
-      break;
-    case '11d': // Гроза (день)
-    case '11n': // Гроза (ніч)
-      svgPath =
-        '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-lightning"><path d="M17.5 19H17a4.5 4.5 0 1 0 0-9h-.03a8 8 0 1 0-7.85 9"/><path d="m8 14 4 6 4-6"/><path d="M12 10v4"/></svg>';
-      break;
-    case '13d': // Сніг (день)
-    case '13n': // Сніг (ніч)
-      svgPath =
-        '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-snow"><path d="M17.5 19H17a4.5 4.5 0 1 0 0-9h-.03a8 8 0 1 0-7.85 9"/><path d="M10 16h.01"/><path d="M14 16h.01"/><path d="M12 18h.01"/><path d="M12 14h.01"/></svg>';
-      break;
-    case '50d': // Туман (день)
-    case '50n': // Туман (ніч)
-      svgPath =
-        '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-fog"><path d="M3 14s.5-2 2-2 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2"/><path d="M17.5 19H17a4.5 4.5 0 1 0 0-9h-.03a8 8 0 1 0-7.85 9"/><path d="M18 10H6"/></svg>';
-      break;
-    default:
-      svgPath =
-        '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucude-cloud"><path d="M17.5 19H17a4.5 4.5 0 1 0 0-9h-.03a8 8 0 1 0-7.85 9"></path></svg>';
-  }
-  return svgPath;
+// Словарь SVG-иконок по коду OpenWeatherMap
+const weatherIcons = {
+  '01d': '../img/icon/002-sun.png',
+  '01n': '../img/icon/01n.png',
+  '02d': '../img/icon/010-clouds-and-sun.png',
+  '02n': '../img/icon/010-clouds-and-sun.png',
+  '03d': '../img/icon/001-cloudy.png',
+  '03n': '../img/icon/001-cloudy.png',
+  '04d': '../img/icon/001-cloudy.png',
+  '04n': '../img/icon/001-cloudy.png',
+  '09d': '../img/icon/09d.png',
+  '09n': '../img/icon/09n.png',
+  '10d': '../img/icon/rain.png',
+  '10n': '../img/icon/rain.png',
+  '11d': '../img/icon/storm.png',
+  '11n': '../img/icon/storm.png',
+  '13d': '../img/icon/snow.png',
+  '13n': '../img/icon/snow.png',
+  '50d': '../img/icon/fog.png',
+  '50n': '../img/icon/fog.png',
+};
+
+// Функция для получения IMG-иконки по коду
+function getWeatherIconImg(iconCode) {
+  const src = weatherIcons[iconCode] || '../img/icon/default.png';
+  return `<img src="${src}" width="48" height="48" alt="weather icon">`;
 }
 
 /**
@@ -92,7 +65,8 @@ export function updateWeatherUI(data, cityName) {
 
   // Оновлення іконки погоди
   const iconCode = data.weather[0].icon;
-  weatherIconElement.innerHTML = getWeatherIconSvg(iconCode); // Використовуємо функцію для SVG
+  console.log(iconCode);
+  weatherIconElement.innerHTML = getWeatherIconImg(iconCode); // Використовуємо функцію для IMG
 
   // Оновлення дати та часу (час оновлюється щосекунди в main.js)
   const now = new Date();
