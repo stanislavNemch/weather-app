@@ -5,6 +5,19 @@ import 'izitoast/dist/css/iziToast.min.css';
 // Импортируем новую функцию для получения цитат из forismatic-api.js
 import { getRandomQuote } from './forismatic-api.js';
 
+// Пути указываются относительно render-functions.js, то есть два уровня вверх до src/, затем вниз до img/
+import iconsSvg from '../../img/icons.svg';
+import sunIcon01d from '../../img/icon/002-sun.png';
+import sunIcon01n from '../../img/icon/01n.png';
+import cloudsAndSunIcon from '../../img/icon/010-clouds-and-sun.png';
+import cloudyIcon from '../../img/icon/001-cloudy.png';
+import rainIcon09d from '../../img/icon/09d.png';
+import rainIcon10d from '../../img/icon/rain.png';
+import stormIcon from '../../img/icon/storm.png';
+import snowIcon from '../../img/icon/snow.png';
+import fogIcon from '../../img/icon/fog.png';
+import defaultIcon from '../../img/icon/default.png';
+
 // Елементи DOM, необхідні для рендерингу
 //const weatherApp = document.querySelector('.weather-app');
 const locationElement = document.querySelector('.current-weather .location');
@@ -24,32 +37,31 @@ const sunsetElement = document.querySelector('.sun-times .sunset');
 const quoteTextElement = document.getElementById('quote-text');
 const quoteAuthorElement = document.getElementById('quote-author');
 
-// Словарь SVG-иконок по коду OpenWeatherMap
+// Словарь IMG-иконок по коду OpenWeatherMap
 const weatherIcons = {
-  '01d': './img/icon/002-sun.png',
-  '01n': './img/icon/01n.png',
-  '02d': './img/icon/010-clouds-and-sun.png',
-  '02n': './img/icon/010-clouds-and-sun.png',
-  '03d': './img/icon/001-cloudy.png',
-  '03n': './img/icon/001-cloudy.png',
-  '04d': './img/icon/001-cloudy.png',
-  '04n': './img/icon/001-cloudy.png',
-  '09d': './img/icon/09d.png',
-  '09n': './img/icon/09n.png',
-  '10d': './img/icon/rain.png',
-  '10n': './img/icon/rain.png',
-  '11d': './img/icon/storm.png',
-  '11n': './img/icon/storm.png',
-  '13d': './img/icon/snow.png',
-  '13n': './img/icon/snow.png',
-  '50d': './img/icon/fog.png',
-  '50n': './img/icon/fog.png',
+  '01d': sunIcon01d,
+  '01n': sunIcon01n,
+  '02d': cloudsAndSunIcon,
+  '02n': cloudsAndSunIcon,
+  '03d': cloudyIcon,
+  '03n': cloudyIcon,
+  '04d': cloudyIcon,
+  '04n': cloudyIcon,
+  '09d': rainIcon09d,
+  '09n': rainIcon09d,
+  '10d': rainIcon10d,
+  '10n': rainIcon10d,
+  '11d': stormIcon,
+  '11n': stormIcon,
+  '13d': snowIcon,
+  '13n': snowIcon,
+  '50d': fogIcon,
+  '50n': fogIcon,
 };
-
 // Функция для получения IMG-иконки по коду
 function getWeatherIconImg(iconCode) {
   //console.log('Icon code:', iconCode); // Для отладки
-  const src = weatherIcons[iconCode] || './img/icon/default.png';
+  const src = weatherIcons[iconCode] || defaultIcon;
   return `<img src="${src}" width="48" height="48" alt="weather icon">`;
 }
 
@@ -91,8 +103,8 @@ export function updateWeatherUI(data, cityName) {
     'en-US', // Изменено на 'en-US'
     { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }
   );
-  sunriseElement.innerHTML = `<svg width="24" height="24"><use href="./img/icons.svg#sunrise"></use></svg>${sunriseTime}`;
-  sunsetElement.innerHTML = `<svg width="24" height="24"><use href="./img/icons.svg#sunset"></use></svg>${sunsetTime}`;
+  sunriseElement.innerHTML = `<svg width="24" height="24"><use href="${iconsSvg}#sunrise"></use></svg>${sunriseTime}`;
+  sunsetElement.innerHTML = `<svg width="24" height="24"><use href="${iconsSvg}#sunset"></use></svg>${sunsetTime}`;
 
   // Оновлення фону
   updateBackground(cityName);
