@@ -67,26 +67,27 @@ export function updateWeatherUI(data, cityName) {
   const iconCode = data.weather[0].icon;
   weatherIconElement.innerHTML = getWeatherIconImg(iconCode);
 
-  // Оновлення дати та часу
+  // Оновлення дати та часу (время обновляется каждую секунду в main.js)
   const now = new Date();
 
-  // Format date for "8th Sat"
+  // Форматируем день месяца с суффиксом (например, 8th)
   const day = now.getDate();
   const daySuffix = getDaySuffix(day);
+  // Форматируем день недели (например, Sat)
   const dayOfWeek = now.toLocaleDateString('en-US', { weekday: 'short' });
   dateElement.innerHTML = `${day}<sup>${daySuffix}</sup> <span class="day-of-week">${dayOfWeek}</span>`;
 
-  // Format month
+  // Форматируем месяц (например, February)
   const formattedMonth = now.toLocaleDateString('en-US', { month: 'long' });
   monthElement.textContent = formattedMonth;
 
   // Час сходу та заходу сонця
   const sunriseTime = new Date(data.sys.sunrise * 1000).toLocaleTimeString(
-    'en-US',
+    'en-US', // Изменено на 'en-US'
     { hour: '2-digit', minute: '2-digit' }
   );
   const sunsetTime = new Date(data.sys.sunset * 1000).toLocaleTimeString(
-    'en-US',
+    'en-US', // Изменено на 'en-US'
     { hour: '2-digit', minute: '2-digit' }
   );
   sunriseElement.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M4.93 4.93l1.41 1.41"></path><path d="M17.66 17.66l1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="M4.93 19.07l1.41-1.41"></path><path d="M17.66 6.34l1.41-1.41"></path></svg>${sunriseTime}`;
@@ -98,7 +99,7 @@ export function updateWeatherUI(data, cityName) {
   updateQuoteDisplay();
 }
 
-// Helper function to get day suffix (st, nd, rd, th)
+// Вспомогательная функция для определения суффикса дня (st, nd, rd, th)
 function getDaySuffix(day) {
   if (day > 3 && day < 21) return 'th';
   switch (day % 10) {
