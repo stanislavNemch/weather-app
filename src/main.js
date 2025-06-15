@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Оновлюємо час щосекунди для демонстрації
   setInterval(() => {
     const now = new Date();
-    const formattedTime = now.toLocaleTimeString('uk-UA', {
+    const formattedTime = now.toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',

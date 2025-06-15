@@ -65,31 +65,28 @@ export function updateWeatherUI(data, cityName) {
 
   // Оновлення іконки погоди
   const iconCode = data.weather[0].icon;
-  //console.log(iconCode);
-  weatherIconElement.innerHTML = getWeatherIconImg(iconCode); // Використовуємо функцію для IMG
+  weatherIconElement.innerHTML = getWeatherIconImg(iconCode);
 
-  // Оновлення дати та часу (час оновлюється щосекунди в main.js)
+  // Оновлення дати та часу
   const now = new Date();
 
-  const formattedDate = now.toLocaleDateString('uk-UA', {
-    day: 'numeric',
-    weekday: 'long',
-  });
-  const formattedMonth = now.toLocaleDateString('uk-UA', { month: 'long' });
+  // Format date for "8th Sat"
+  const day = now.getDate();
+  const daySuffix = getDaySuffix(day);
+  const dayOfWeek = now.toLocaleDateString('en-US', { weekday: 'short' });
+  dateElement.innerHTML = `${day}<sup>${daySuffix}</sup> <span class="day-of-week">${dayOfWeek}</span>`;
 
-  // Форматуємо дату для відображення як "8 Субота"
-  dateElement.textContent = `${formattedDate.split(',')[0]} ${formattedDate
-    .split(',')[1]
-    .trim()}`;
+  // Format month
+  const formattedMonth = now.toLocaleDateString('en-US', { month: 'long' });
   monthElement.textContent = formattedMonth;
 
   // Час сходу та заходу сонця
   const sunriseTime = new Date(data.sys.sunrise * 1000).toLocaleTimeString(
-    'uk-UA',
+    'en-US',
     { hour: '2-digit', minute: '2-digit' }
   );
   const sunsetTime = new Date(data.sys.sunset * 1000).toLocaleTimeString(
-    'uk-UA',
+    'en-US',
     { hour: '2-digit', minute: '2-digit' }
   );
   sunriseElement.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M4.93 4.93l1.41 1.41"></path><path d="M17.66 17.66l1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="M4.93 19.07l1.41-1.41"></path><path d="M17.66 6.34l1.41-1.41"></path></svg>${sunriseTime}`;
@@ -99,6 +96,21 @@ export function updateWeatherUI(data, cityName) {
   updateBackground(cityName);
   // Оновлення цитати після оновлення погоди
   updateQuoteDisplay();
+}
+
+// Helper function to get day suffix (st, nd, rd, th)
+function getDaySuffix(day) {
+  if (day > 3 && day < 21) return 'th';
+  switch (day % 10) {
+    case 1:
+      return 'st';
+    case 2:
+      return 'nd';
+    case 3:
+      return 'rd';
+    default:
+      return 'th';
+  }
 }
 
 /**
