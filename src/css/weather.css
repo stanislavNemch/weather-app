@@ -322,6 +322,14 @@
     padding: 0;
   }
 
+  .forecast-tabs {
+    margin-right: 16px;
+  }
+
+  .tab-button {
+    width: 182px;
+  }
+
   .date-time-info {
     position: absolute;
     left: 0;
