@@ -300,12 +300,19 @@
   display: flex;
   width: 100%;
   justify-content: center; /* Распределяем элементы по горизонтали */
-  gap: 20px;
   align-items: center;
   position: absolute;
   top: 90px; /* Позиция ниже даты */
+  left: 14.5px;
   padding: 0 25px; /* Отступы как у даты */
   box-sizing: border-box;
+}
+
+.month-day-divider {
+  margin: 0 10px;
+  height: 22px;
+  display: flex;
+  align-items: center;
 }
 
 .month {
@@ -322,32 +329,32 @@
 
 .sun-times {
   display: flex;
+  align-items: stretch; /* растягиваем дочерние элементы по высоте */
   justify-content: center;
-  align-items: center;
-  gap: 20px;
   width: 100%;
   font-weight: 400;
   font-size: 14px;
   letter-spacing: 0.04em;
   position: absolute;
-  bottom: 25px; /* Расположение снизу */
-  padding: 0 25px; /* Отступы как у даты */
-  box-sizing: border-box;
+  bottom: 25px;
+  padding: 0 25px;
 }
 
 .sunrise,
 .sunset {
   display: flex;
   align-items: center;
-  justify-content: center;
+  height: 24px; /* одинаковая высота */
+  padding: 0 8px;
   gap: 8px; /* Увеличиваем зазор между иконкой и текстом */
 }
 
-.sun-times svg {
-  width: 24px; /* Увеличиваем размер иконок */
-  height: 24px;
-  color: #ff7f00; /* Оранжевый цвет для иконки солнца */
-  stroke-width: 2; /* Толщина обводки */
+/* New style for the divider between sunrise and sunset */
+.sun-time-divider {
+  display: flex;
+  align-items: center;
+  height: 24px; /* совпадает с .sunrise/.sunset */
+  padding: 0 4px;
 }
 
 .quote {
@@ -385,6 +392,13 @@
 
 /* Tablet styles */
 @media screen and (min-width: 768px) {
+  .date-time-info {
+    min-width: 600px;
+    margin: 0 auto;
+    max-width: 680px;
+    margin-bottom: 80px;
+  }
+
   .header-search {
     max-width: 731px;
   }
@@ -400,6 +414,37 @@
   .city-tags {
     max-width: 600px;
     margin-bottom: 106px;
+  }
+
+  .sun-times {
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto; /* Убираем фиксированную ширину */
+  }
+
+  .date {
+    font-weight: 300;
+    font-size: 60px;
+    letter-spacing: 0.04em;
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto; /* Убираем фиксированную ширину */
+  }
+
+  .month-time-container {
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    top: 110px;
+    left: 52%;
+    transform: translateX(-50%);
+    width: auto;
   }
 
   .weather-display {
@@ -446,6 +491,13 @@
     min-height: 100vh;
   }
 
+  .month-time-container {
+    top: 120px; /* Позиция ниже даты */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto; /* Убираем фиксированную ширину */
+  }
+
   .header-search {
     width: 100%;
     max-width: 822px;
@@ -485,6 +537,7 @@
   }
 
   .date-time-info {
+    border-radius: 0 34px 0 0;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -500,5 +553,11 @@
   .romb {
     top: 100px;
     right: 500px; /* Adjust as per desktop image */
+  }
+
+  /* Ensure dividers are hidden on desktop */
+  .month-day-divider,
+  .sun-time-divider {
+    display: none;
   }
 }
