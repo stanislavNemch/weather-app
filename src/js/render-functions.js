@@ -65,12 +65,12 @@ export function updateWeatherUI(data, cityName) {
 
   // Оновлення іконки погоди
   const iconCode = data.weather[0].icon;
-  console.log(iconCode);
+  //console.log(iconCode);
   weatherIconElement.innerHTML = getWeatherIconImg(iconCode); // Використовуємо функцію для IMG
 
   // Оновлення дати та часу (час оновлюється щосекунди в main.js)
   const now = new Date();
-  // Використовуємо 'uk-UA' для української локалізації
+
   const formattedDate = now.toLocaleDateString('uk-UA', {
     day: 'numeric',
     weekday: 'long',

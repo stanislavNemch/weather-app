@@ -7,6 +7,7 @@ const forbiddenTags = ['tank', 'war', 'danger', 'military', 'army', 'battle'];
  * @param {string} query - Запрос для поиска изображений (например, название города или тип погоды).
  * @returns {Promise<string|null>} - URL изображения или null в случае ошибки.
  */
+
 export async function getBackgroundImage(query) {
   try {
     const response = await fetch(

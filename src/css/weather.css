@@ -1,8 +1,4 @@
 ﻿/* Mobile-first */
-.weather-app {
-  background-color: var(--primary-bg-color); /* Fallback */
-}
-
 .header-search {
   display: flex;
   flex-direction: column;
@@ -235,43 +231,90 @@
 }
 
 .date-time-info {
-  margin: 0;
+  border-radius: 34px;
   width: 276px;
   height: 184px;
-  border-radius: 34px;
   background: rgba(16, 33, 54, 0.8);
-  letter-spacing: 0.04em;
   color: #fff;
-  margin-bottom: 20px;
-}
-
-.date-time-info .date {
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
-.date-time-info .month {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
-
-.date-time-info .time {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-}
-
-.date-time-info .sun-times {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  font-size: 0.9rem;
+  flex-direction: column;
+  justify-content: center; /* Центрируем содержимое по вертикали */
+  align-items: center; /* Центрируем содержимое по горизонтали */
+  padding: 20px 25px; /* Увеличиваем горизонтальный padding */
+  box-sizing: border-box; /* Включаем padding в общую ширину/высоту */
+  position: relative; /* Для позиционирования текста */
+}
+
+.date {
+  font-size: 2.5rem; /* Увеличенный размер шрифта для даты */
+  font-weight: 500; /* Полужирный */
+  line-height: 1; /* Убираем лишний интерлиньяж */
+  position: absolute;
+  top: 25px; /* Расположение сверху */
+  left: 25px; /* Отступ слева */
+  display: flex;
+  align-items: baseline; /* Выравнивание по базовой линии для "th" */
+}
+
+.date sup {
+  font-size: 0.9em; /* Размер для "th" */
+  vertical-align: super;
+  margin-left: 2px;
+}
+
+.date .day-of-week {
+  font-size: 1.5rem; /* Размер шрифта для дня недели */
+  margin-left: 10px; /* Отступ от числа */
+  font-weight: 400; /* Нормальный */
+}
+
+.month-time-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between; /* Распределяем элементы по горизонтали */
+  align-items: center;
+  position: absolute;
+  top: 90px; /* Позиция ниже даты */
+  padding: 0 25px; /* Отступы как у даты */
+  box-sizing: border-box;
+}
+
+.month {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8); /* Немного менее яркий цвет для месяца */
+}
+
+.time {
+  font-size: 1.8rem;
+  font-weight: 600; /* Более жирный для времени */
+}
+
+.sun-times {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+  position: absolute;
+  bottom: 25px; /* Расположение снизу */
+  padding: 0 25px; /* Отступы как у даты */
+  box-sizing: border-box;
+}
+
+.sunrise,
+.sunset {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Увеличиваем зазор между иконкой и текстом */
+  color: rgba(255, 255, 255, 0.9); /* Чуть светлее */
 }
 
 .sun-times svg {
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-  margin-right: 5px;
+  width: 24px; /* Увеличиваем размер иконок */
+  height: 24px;
+  color: #ff7f00; /* Оранжевый цвет для иконки солнца */
+  stroke-width: 2; /* Толщина обводки */
 }
 
 .quote {
@@ -342,6 +385,13 @@
 
   .date-time-info {
     font-size: 1.3rem;
+    margin-bottom: 60px;
+  }
+
+  .quote {
+    position: absolute;
+    right: 0;
+    margin-right: 32px;
   }
 
   #quote-text {
@@ -409,10 +459,7 @@
   }
 
   .quote {
-    position: absolute;
     bottom: 50px;
-    right: 0;
-    margin-right: 16px;
   }
 
   .romb {
