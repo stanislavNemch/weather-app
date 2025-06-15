@@ -14,5 +14,8 @@
             <circle cx="14" cy="14" r="14" fill="white" fill-opacity="0.2" />
             <path d="M12 11L16 15L12 19" stroke-width="1.5" fill="black" />
         </symbol>
+        <symbol id="vertical-line" width="1" height="40" viewBox="0 0 1 40" fill="none">
+            <path d="M0.5 0V40" stroke="#27384A"/>
+        </symbol>
     </defs>
 </svg>

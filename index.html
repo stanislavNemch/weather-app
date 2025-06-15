@@ -9,7 +9,7 @@
   <script type="module" crossorigin src="/weather-app/index.js"></script>
   <link rel="modulepreload" crossorigin href="/weather-app/assets/vendor-I1I71QQ2.js">
   <link rel="stylesheet" crossorigin href="/weather-app/assets/vendor-DnveWo0P.css">
-  <link rel="stylesheet" crossorigin href="/weather-app/assets/index-DcU3gPpi.css">
+  <link rel="stylesheet" crossorigin href="/weather-app/assets/index-kQ6Uph90.css">
 </head>
 
 <body>
@@ -18,12 +18,12 @@
     <div class="header-search">
       <div class="search-bar">
         <svg class="lucide lucide-location" width="22" height="22">
-          <use href="/weather-app/assets/icons-Badvc3hP.svg#location"></use>
+          <use href="/weather-app/assets/icons-O5J1NvYn.svg#location"></use>
         </svg>
         <input type="text" id="city-input" placeholder="Enter the city">
         <button id="add-city-button">
           <svg class="lucide lucide-star" width="22" height="20">
-            <use href="/weather-app/assets/icons-Badvc3hP.svg#star"></use>
+            <use href="/weather-app/assets/icons-O5J1NvYn.svg#star"></use>
           </svg>
         </button>
       </div>
@@ -31,7 +31,7 @@
         <!-- Міста будуть додані тут -->
         <button class="city-tags-toggle" id="city-tags-toggle" aria-label="Показать все города" style="display:none;">
           <svg class="arrow-left" width="28" height="28">
-            <use href="/weather-app/assets/icons-Badvc3hP.svg#arrow-left"></use>
+            <use href="/weather-app/assets/icons-O5J1NvYn.svg#arrow-left"></use>
           </svg>
         </button>
       </div>
@@ -41,11 +41,22 @@
       <div class="current-weather">
         <div class="weather-icon">
         </div>
-        <div class="location">Київ, UA</div>
+        <div class="location">Kyiv, UA</div>
         <div class="temperature">-3°</div>
         <div class="min-max">
-          <span class="min-temp">мін -2°</span>
-          <span class="max-temp">макс 1°</span>
+          <div class="min-col">
+            <span class="min-label">min</span>
+            <span class="min-temp">-2°</span>
+          </div>
+          <span class="minmax-divider">
+            <svg width="1" height="40">
+              <use href="/weather-app/assets/icons-O5J1NvYn.svg#vertical-line"></use>
+            </svg>
+          </span>
+          <div class="max-col">
+            <span class="max-label">max</span>
+            <span class="max-temp">1°</span>
+          </div>
         </div>
       </div>
 
