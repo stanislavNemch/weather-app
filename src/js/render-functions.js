@@ -134,10 +134,13 @@ export function updateWeatherUI(data, cityName) {
 export async function updateBackground(query) {
   const imageUrl = await getBackgroundImage(query);
   if (imageUrl) {
-    weatherApp.style.backgroundImage = `url('${imageUrl}')`;
+    document.body.style.setProperty('--bg-image', `url('${imageUrl}')`);
+    document.querySelector(
+      '.weather-app'
+    ).style.backgroundImage = `url('${imageUrl}')`;
   } else {
-    // Якщо зображення не знайдено, використовуємо фоновий колір із CSS
-    weatherApp.style.backgroundImage = 'none';
+    document.body.style.setProperty('--bg-image', 'none');
+    document.querySelector('.weather-app').style.backgroundImage = 'none';
   }
 }
 

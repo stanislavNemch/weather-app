@@ -1,7 +1,6 @@
 ﻿/* Mobile-first */
 .weather-app {
   background-color: var(--primary-bg-color); /* Fallback */
-  background-image: url('https://placehold.co/320x790/f1f2f7/000000?text=Mobile+Background');
 }
 
 .header-search {

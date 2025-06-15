@@ -63,6 +63,19 @@ body {
   /*overflow: hidden; /* Предотвращаем прокрутку */
   color: var(--text-dark);
   position: relative;
+  --bg-image: none;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  filter: blur(16px) brightness(0.8);
+  transition: background-image 0.5s;
 }
 
 .weather-app {
@@ -72,8 +85,15 @@ body {
   padding: 0 16px;
   transition: background-image 0.5s ease-in-out;
   background-color: var(--primary-bg-color); /* Фоновый цвет по умолчанию */
-  background-image: url('https://placehold.co/320x790/f1f2f7/000000?text=Mobile+Background'); /* Фоновое изображение по умолчанию */
   background-size: cover;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 32px;
+  background-image: var(--bg-image); /* Оставляем фон */
+  background-size: cover;
+  background-position: center;
 }
 
 /* Tablet styles */
@@ -82,7 +102,6 @@ body {
     max-width: 768px;
     height: 1134px; /* Высота для планшета */
     padding: 0 15px;
-    background-image: url('https://placehold.co/768x1134/f1f2f7/000000?text=Tablet+Background'); /* Фоновое изображение для планшета */
   }
 }
 
@@ -94,7 +113,6 @@ body {
     margin: 0 auto;
     position: relative;
     overflow: hidden;
-    background-image: url('https://placehold.co/1280x950/f1f2f7/000000?text=Desktop+Background'); /* Фоновое изображение для десктопа */
   }
 }
 
