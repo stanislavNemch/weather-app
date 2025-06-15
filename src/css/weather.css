@@ -10,7 +10,6 @@
   justify-content: center;
   width: 100%;
   max-width: 320px; /* Ограничиваем ширину для мобильных */
-  padding: 16px;
 }
 
 .search-bar {
@@ -195,7 +194,14 @@
 }
 
 .date-time-info {
-  font-size: 1.1rem;
+  margin: 0;
+  width: 276px;
+  height: 184px;
+  border-radius: 34px;
+  background: rgba(16, 33, 54, 0.8);
+  letter-spacing: 0.04em;
+  color: #fff;
+  margin-bottom: 20px;
 }
 
 .date-time-info .date {
@@ -228,17 +234,22 @@
 }
 
 .quote {
-  margin-top: 30px;
   font-style: italic;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
-  padding: 0 10px;
+  color: var(--text-light);
+}
+
+#quote-text {
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-align: right;
 }
 
 .quote .author {
   text-align: right;
-  margin-top: 10px;
-  font-weight: bold;
+  font-weight: 400;
+  font-size: 18px;
+  margin-top: 8px;
 }
 
 .romb {
@@ -283,6 +294,10 @@
 
   .date-time-info {
     font-size: 1.3rem;
+  }
+
+  #quote-text {
+    font-size: 22px;
   }
 
   .romb {
@@ -335,29 +350,15 @@
     left: 0;
     bottom: 0;
     margin: 0;
-    border-radius: 0 34px 0 0;
     width: 624px;
     height: 264px;
-    background: rgba(16, 33, 54, 0.6);
-    letter-spacing: 0.04em;
-    color: #fff;
   }
 
   .quote {
     position: absolute;
     bottom: 50px;
     right: 0;
-    max-width: 400px;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 22px;
-    letter-spacing: 0.04em;
-    text-align: right;
-    color: #fff;
-  }
-
-  .quote .author {
-    text-align: right;
+    margin-right: 16px;
   }
 
   .romb {
