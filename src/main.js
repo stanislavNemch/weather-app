@@ -41,6 +41,7 @@ function addCity() {
 
   if (!newCity) {
     showNotification('Поле вводу міста не може бути порожнім.', 'error');
+    cityInput.value = ''; // очищаем поле
     return;
   }
 
@@ -50,6 +51,7 @@ function addCity() {
       'Назва міста не може складатися лише з пробілів.',
       'error'
     );
+    cityInput.value = ''; // очищаем поле
     return;
   }
 
@@ -84,11 +86,13 @@ function addCity() {
           `Місто "${newCity}" не знайдено. Будь ласка, перевірте назву.`,
           'error'
         );
+        cityInput.value = ''; // очищаем поле
       } else {
         showNotification(
           `Сталася помилка під час додавання міста: ${error.message}`,
           'error'
         );
+        cityInput.value = ''; // очищаем поле
       }
     })
     .finally(() => {

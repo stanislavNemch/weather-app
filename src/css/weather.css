@@ -234,6 +234,7 @@
 }
 
 .quote {
+  max-width: 395px;
   font-style: italic;
   color: var(--text-light);
 }
