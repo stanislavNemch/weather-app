@@ -56,7 +56,7 @@ export async function getRandomQuote() {
       // Ограничиваем длину цитаты
       const limitedText = limitQuoteText(data.quoteText);
       return {
-        text: `“${data.quoteText}”`, // Добавляем кавычки для стилизации
+        text: `“${limitedText}”`, // Добавляем кавычки для стилизации
         author: data.quoteAuthor || 'Unknown', // Если автор пуст, указываем "Unknown"
       };
     } else {
