@@ -60,8 +60,8 @@ function getWeatherIconImg(iconCode) {
 export function updateWeatherUI(data, cityName) {
   locationElement.textContent = `${data.name}, ${data.sys.country}`;
   temperatureElement.textContent = `${Math.round(data.main.temp)}°`;
-  minTempElement.textContent = `мін ${Math.round(data.main.temp_min)}°`;
-  maxTempElement.textContent = `макс ${Math.round(data.main.temp_max)}°`;
+  minTempElement.textContent = `${Math.round(data.main.temp_min)}°`;
+  maxTempElement.textContent = `${Math.round(data.main.temp_max)}°`;
 
   // Оновлення іконки погоди
   const iconCode = data.weather[0].icon;

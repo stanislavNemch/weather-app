@@ -140,19 +140,55 @@
 }
 
 .current-weather .location {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 18px;
+  text-align: center;
+  color: #767d85;
+  margin-bottom: 8px;
 }
 
 .current-weather .temperature {
-  font-size: 4rem;
   font-weight: 300;
-  line-height: 1;
+  font-size: 90px;
+  letter-spacing: 0.04em;
+  text-align: center;
 }
 
-.current-weather .min-max {
-  font-size: 0.9rem;
-  margin-bottom: 20px;
+.min-max {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.min-col,
+.max-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.min-label,
+.max-label {
+  font-weight: 400;
+  font-size: 18px;
+  text-align: center;
+  color: #767d85;
+  margin-bottom: 8px;
+}
+
+.min-temp,
+.max-temp {
+  font-weight: 400;
+  font-size: 18px;
+  text-align: center;
+}
+
+.minmax-divider {
+  display: flex;
+  align-items: center;
+  height: 40px;
 }
 
 .weather-icon {
