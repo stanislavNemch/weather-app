@@ -10,6 +10,48 @@
   --border-color: rgba(255, 255, 255, 0.15);
 }
 
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%; /* Важно для адаптивности изображений */
+  height: auto; /* Важно для адаптивности изображений */
+}
+
+a {
+  text-decoration: none;
+  color: inherit; /* Наследовать цвет текста */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
 body {
   margin: 0;
   font-family: var(--font-family);
@@ -17,24 +59,43 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #eee;
+  background-color: var(--primary-bg-color);
   overflow: hidden; /* Предотвращаем прокрутку */
   color: var(--text-dark);
   position: relative;
 }
 
 .weather-app {
-  position: relative;
   width: 100%;
-  height: 100vh; /* Используем vh для мобильных */
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  box-sizing: border-box;
+  height: 790px; /* Высота для мобильных устройств */
+  max-width: 320px;
+  padding: 0 16px;
   transition: background-image 0.5s ease-in-out;
+  background-color: var(--primary-bg-color); /* Фоновый цвет по умолчанию */
+  background-image: url('https://placehold.co/320x790/f1f2f7/000000?text=Mobile+Background'); /* Фоновое изображение по умолчанию */
+  background-size: cover;
+}
+
+/* Tablet styles */
+@media screen and (min-width: 768px) {
+  .weather-app {
+    max-width: 768px;
+    height: 1134px; /* Высота для планшета */
+    padding: 0 15px;
+    background-image: url('https://placehold.co/768x1134/f1f2f7/000000?text=Tablet+Background'); /* Фоновое изображение для планшета */
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .weather-app {
+    max-width: 1280px;
+    height: 950px; /* Высота для десктопа */
+    padding: 0 15px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background-image: url('https://placehold.co/1280x950/f1f2f7/000000?text=Desktop+Background'); /* Фоновое изображение для десктопа */
+  }
 }
 
 /* Стилі для лоадера (з https://github.com/vineethtrv/css-loader) */

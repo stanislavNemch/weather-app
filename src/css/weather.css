@@ -1,33 +1,44 @@
 ﻿/* Mobile-first */
 .weather-app {
-  width: 320px;
-  height: 790px;
   background-color: var(--primary-bg-color); /* Fallback */
   background-image: url('https://placehold.co/320x790/f1f2f7/000000?text=Mobile+Background');
 }
 
+.header-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px; /* Ограничиваем ширину для мобильных */
+  padding: 16px;
+}
+
 .search-bar {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+  margin-bottom: 16px;
   width: 100%;
-  max-width: 300px;
   height: 48px;
-  margin-bottom: 20px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 30px;
-  padding: 5px 15px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .lucide-location {
   width: 22px;
   height: 22px;
-  margin: 13px 16px 13px 5px;
+  margin-left: 20px;
+  margin-right: 16px;
 }
 
 .search-bar input {
   flex-grow: 1;
+  padding: 0;
   border: none;
   outline: none;
+  max-width: 180px; /* Ограничиваем ширину поля ввода */
   background: transparent;
   font-weight: 400;
   font-size: 18px;
@@ -40,7 +51,7 @@
   border: none;
   cursor: pointer;
   color: #666;
-  padding: 0 5px;
+  margin-right: 20px;
 }
 
 .city-tags {
@@ -103,17 +114,31 @@
 }
 
 .weather-display {
-  background-color: var(--dark-blue);
-  border-radius: 30px;
-  padding: 20px;
-  width: 90%;
   max-width: 300px;
   color: var(--text-light);
   text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Убираем лишние отступы, если есть */
+.current-weather,
+.forecast-tabs,
+.date-time-info {
+  margin: 0;
+  padding: 0;
+}
+
+/* Отступ между current-weather и forecast-tabs */
+.current-weather {
+  width: 100%;
+  min-width: 280px;
+  padding: 32px 59px;
+  border-radius: 34px;
+  box-shadow: 0 5px 33px 0 rgba(16, 33, 54, 0.6);
+  background: #102136;
+  margin-bottom: 33px;
 }
 
 .current-weather .location {
@@ -140,16 +165,25 @@
 
 .forecast-tabs {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
   gap: 10px;
-  margin-top: 20px;
+  margin-bottom: 32px;
 }
 
 .tab-button {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.5);
   border: none;
-  color: var(--text-light);
-  padding: 8px 15px;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #000;
   border-radius: 20px;
+  padding: 0px 12px;
+  width: 126px;
+  height: 27px;
   cursor: pointer;
   font-family: var(--font-family);
   transition: background-color 0.3s ease;
@@ -157,11 +191,10 @@
 
 .tab-button.active {
   background-color: var(--text-light);
-  color: var(--dark-blue);
+  color: #000;
 }
 
 .date-time-info {
-  margin-top: 30px;
   font-size: 1.1rem;
 }
 
@@ -222,15 +255,17 @@
 }
 
 /* Tablet styles */
-@media (min-width: 768px) {
-  .weather-app {
-    width: 768px;
-    height: 1134px;
-    background-image: url('https://placehold.co/768x1134/f1f2f7/000000?text=Tablet+Background');
+@media screen and (min-width: 768px) {
+  .header-search {
+    max-width: 731px;
   }
 
   .search-bar {
-    max-width: 600px;
+    width: 100%;
+  }
+
+  .search-bar input {
+    max-width: 660px;
   }
 
   .city-tags {
@@ -258,44 +293,59 @@
 }
 
 /* Desktop styles */
-@media (min-width: 1280px) {
-  .weather-app {
-    width: 1280px;
-    height: 950px;
-    background-color: var(--primary-bg-color); /* Fallback */
-    background-image: url('https://placehold.co/1280x950/f1f2f7/000000?text=Desktop+Background');
-    border-radius: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  }
-
+@media screen and (min-width: 1280px) {
   body {
     min-height: 100vh;
   }
 
-  .search-bar {
-    max-width: 800px;
+  .header-search {
+    width: 100%;
+    max-width: 822px;
+    margin: 0 auto; /* Центрируем внутри weather-app */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .city-tags {
-    max-width: 800px;
+    align-self: flex-start;
+    margin-left: 0;
   }
 
   .weather-display {
+    width: 411px;
     position: absolute;
-    right: 100px;
-    top: 250px;
-    max-width: 350px;
-    padding: 40px;
+    top: 252px;
+    right: -20px;
+    left: auto;
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  .date-time-info {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+    border-radius: 0 34px 0 0;
+    width: 624px;
+    height: 264px;
+    background: rgba(16, 33, 54, 0.6);
+    letter-spacing: 0.04em;
+    color: #fff;
   }
 
   .quote {
     position: absolute;
     bottom: 50px;
-    right: 100px;
+    right: 0;
     max-width: 400px;
-    text-align: left;
-    font-size: 1rem;
-    color: var(--text-dark); /* Измените цвет для лучшей видимости на фоне */
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    text-align: right;
+    color: #fff;
   }
 
   .quote .author {
