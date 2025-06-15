@@ -84,11 +84,11 @@ export function updateWeatherUI(data, cityName) {
   // Час сходу та заходу сонця
   const sunriseTime = new Date(data.sys.sunrise * 1000).toLocaleTimeString(
     'en-US', // Изменено на 'en-US'
-    { hour: '2-digit', minute: '2-digit' }
+    { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }
   );
   const sunsetTime = new Date(data.sys.sunset * 1000).toLocaleTimeString(
     'en-US', // Изменено на 'en-US'
-    { hour: '2-digit', minute: '2-digit' }
+    { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }
   );
   sunriseElement.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M4.93 4.93l1.41 1.41"></path><path d="M17.66 17.66l1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="M4.93 19.07l1.41-1.41"></path><path d="M17.66 6.34l1.41-1.41"></path></svg>${sunriseTime}`;
   sunsetElement.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M4.93 4.93l1.41 1.41"></path><path d="M17.66 17.66l1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="M4.93 19.07l1.41-1.41"></path><path d="M17.66 6.34l1.41-1.41"></path></svg>${sunsetTime}`;

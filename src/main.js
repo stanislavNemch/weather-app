@@ -189,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
+      hourCycle: 'h23',
     });
     timeElement.textContent = formattedTime;
   }, 1000);
