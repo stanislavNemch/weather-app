@@ -26,30 +26,30 @@ const quoteAuthorElement = document.getElementById('quote-author');
 
 // Словарь SVG-иконок по коду OpenWeatherMap
 const weatherIcons = {
-  '01d': '../img/icon/002-sun.png',
-  '01n': '../img/icon/01n.png',
-  '02d': '../img/icon/010-clouds-and-sun.png',
-  '02n': '../img/icon/010-clouds-and-sun.png',
-  '03d': '../img/icon/001-cloudy.png',
-  '03n': '../img/icon/001-cloudy.png',
-  '04d': '../img/icon/001-cloudy.png',
-  '04n': '../img/icon/001-cloudy.png',
-  '09d': '../img/icon/09d.png',
-  '09n': '../img/icon/09n.png',
-  '10d': '../img/icon/rain.png',
-  '10n': '../img/icon/rain.png',
-  '11d': '../img/icon/storm.png',
-  '11n': '../img/icon/storm.png',
-  '13d': '../img/icon/snow.png',
-  '13n': '../img/icon/snow.png',
-  '50d': '../img/icon/fog.png',
-  '50n': '../img/icon/fog.png',
+  '01d': './img/icon/002-sun.png',
+  '01n': './img/icon/01n.png',
+  '02d': './img/icon/010-clouds-and-sun.png',
+  '02n': './img/icon/010-clouds-and-sun.png',
+  '03d': './img/icon/001-cloudy.png',
+  '03n': './img/icon/001-cloudy.png',
+  '04d': './img/icon/001-cloudy.png',
+  '04n': './img/icon/001-cloudy.png',
+  '09d': './img/icon/09d.png',
+  '09n': './img/icon/09n.png',
+  '10d': './img/icon/rain.png',
+  '10n': './img/icon/rain.png',
+  '11d': './img/icon/storm.png',
+  '11n': './img/icon/storm.png',
+  '13d': './img/icon/snow.png',
+  '13n': './img/icon/snow.png',
+  '50d': './img/icon/fog.png',
+  '50n': './img/icon/fog.png',
 };
 
 // Функция для получения IMG-иконки по коду
 function getWeatherIconImg(iconCode) {
   //console.log('Icon code:', iconCode); // Для отладки
-  const src = weatherIcons[iconCode] || '../img/icon/default.png';
+  const src = weatherIcons[iconCode] || './img/icon/default.png';
   return `<img src="${src}" width="48" height="48" alt="weather icon">`;
 }
 
