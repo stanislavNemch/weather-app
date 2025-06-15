@@ -232,7 +232,6 @@
 
 .date-time-info {
   border-radius: 34px;
-  width: 276px;
   height: 184px;
   background: rgba(16, 33, 54, 0.8);
   color: #fff;
@@ -246,32 +245,43 @@
 }
 
 .date {
-  font-size: 2.5rem; /* Увеличенный размер шрифта для даты */
-  font-weight: 500; /* Полужирный */
-  line-height: 1; /* Убираем лишний интерлиньяж */
+  font-weight: 300;
+  font-size: 45px;
+  letter-spacing: 0.04em;
+  text-align: center;
   position: absolute;
-  top: 25px; /* Расположение сверху */
-  left: 25px; /* Отступ слева */
-  display: flex;
-  align-items: baseline; /* Выравнивание по базовой линии для "th" */
+  top: 25px;
+  left: 61px;
+  width: 194px; /* или нужная ширина */
+  margin-bottom: 10px;
+}
+
+.date-number {
+  position: relative;
+  display: inline-block;
 }
 
 .date sup {
-  font-size: 0.9em; /* Размер для "th" */
-  vertical-align: super;
+  position: absolute;
+  top: 0;
+  font-weight: 300;
+  font-size: 25px;
   margin-left: 2px;
 }
 
-.date .day-of-week {
-  font-size: 1.5rem; /* Размер шрифта для дня недели */
-  margin-left: 10px; /* Отступ от числа */
-  font-weight: 400; /* Нормальный */
+.day-of-week {
+  font-weight: 300;
+  font-size: 45px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin-left: 40px;
 }
 
 .month-time-container {
   display: flex;
   width: 100%;
-  justify-content: space-between; /* Распределяем элементы по горизонтали */
+  justify-content: center; /* Распределяем элементы по горизонтали */
+  gap: 20px;
   align-items: center;
   position: absolute;
   top: 90px; /* Позиция ниже даты */
@@ -280,22 +290,26 @@
 }
 
 .month {
-  font-size: 1.2rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.8); /* Немного менее яркий цвет для месяца */
+  font-size: 14px;
+  letter-spacing: 0.04em;
 }
 
 .time {
-  font-size: 1.8rem;
-  font-weight: 600; /* Более жирный для времени */
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
 }
 
 .sun-times {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
   width: 100%;
-  font-size: 1rem;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
   position: absolute;
   bottom: 25px; /* Расположение снизу */
   padding: 0 25px; /* Отступы как у даты */
@@ -306,8 +320,8 @@
 .sunset {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px; /* Увеличиваем зазор между иконкой и текстом */
-  color: rgba(255, 255, 255, 0.9); /* Чуть светлее */
 }
 
 .sun-times svg {
