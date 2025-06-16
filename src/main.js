@@ -169,10 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderCityTags(cities, handleCityClick, handleCityRemove);
 
-  // ======================= ИСПРАВЛЕНИЕ ЗДЕСЬ =======================
-  // Прямой вызов для загрузки погоды и фона при первой загрузке
   fetchAndDisplayWeather(currentCity);
-  // =================================================================
 
   updateQuoteDisplay();
 
