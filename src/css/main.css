@@ -64,7 +64,7 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: var(--primary-bg-color);
-  /*overflow: hidden; /* Предотвращаем прокрутку */
+  overflow: hidden; /* Предотвращаем прокрутку */
   color: var(--text-dark);
   position: relative;
   --bg-image: none;

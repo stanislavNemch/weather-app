@@ -6,11 +6,12 @@ import 'izitoast/dist/css/iziToast.min.css';
 import { getRandomQuote } from './forismatic-api.js';
 
 // Пути указываются относительно render-functions.js, то есть два уровня вверх до src/, затем вниз до img/
-import iconsSvg from '../img/icons.svg'; // Путь из src/js к src/img
-import sunIcon01d from '../img/icon/sun.png';
+import iconsSvg from '../img/icons.svg';
+import sunIcon01d from '../img/icon/sun-weather.png';
 import sunIcon01n from '../img/icon/01n.png';
-import cloudsAndSunIcon from '../img/icon/02d.png';
-import cloudyIcon from '../img/icon/cloudy.png';
+import fewCloudsDay from '../img/icon/02d.png';
+import fewCloudsNight from '../img/icon/02n.png';
+import cloudyGeneric from '../img/icon/cloudy.png';
 import rainIcon09d from '../img/icon/09d.png';
 import rainIcon10d from '../img/icon/rain.png';
 import stormIcon from '../img/icon/storm.png';
@@ -39,24 +40,24 @@ const quoteAuthorElement = document.getElementById('quote-author');
 
 // Словарь IMG-иконок по коду OpenWeatherMap
 const weatherIcons = {
-  '01d': sunIcon01d,
-  '01n': sunIcon01n,
-  '02d': cloudsAndSunIcon,
-  '02n': cloudsAndSunIcon,
-  '03d': cloudyIcon,
-  '03n': cloudyIcon,
-  '04d': cloudyIcon,
-  '04n': cloudyIcon,
-  '09d': rainIcon09d,
-  '09n': rainIcon09d,
-  '10d': rainIcon10d,
-  '10n': rainIcon10d,
-  '11d': stormIcon,
-  '11n': stormIcon,
-  '13d': snowIcon,
-  '13n': snowIcon,
-  '50d': fogIcon,
-  '50n': fogIcon,
+  '01d': sunIcon01d, // Иконка для ясного неба днем
+  '01n': sunIcon01n, // Иконка для ясного неба ночью
+  '02d': fewCloudsDay, // Иконка для небольшой облачности днем
+  '02n': fewCloudsNight, // Иконка для небольшой облачности ночью
+  '03d': cloudyGeneric, // Иконка для рассеянных облаков днем
+  '03n': cloudyGeneric, // Иконка для рассеянных облаков ночью
+  '04d': cloudyGeneric, // Иконка для разорванных облаков днем
+  '04n': cloudyGeneric, // Иконка для разорванных облаков ночью
+  '09d': rainIcon09d, // Иконка для ливня днем
+  '09n': rainIcon09d, // Иконка для ливня ночью (используем ту же, если нет специфической)
+  '10d': rainIcon10d, // Иконка для дождя днем
+  '10n': rainIcon10d, // Иконка для дождя ночью
+  '11d': stormIcon, // Иконка для грозы днем
+  '11n': stormIcon, // Иконка для грозы ночью
+  '13d': snowIcon, // Иконка для снега днем
+  '13n': snowIcon, // Иконка для снега ночью
+  '50d': fogIcon, // Иконка для тумана днем
+  '50n': fogIcon, // Иконка для тумана ночью
 };
 // Функция для получения IMG-иконки по коду
 function getWeatherIconImg(iconCode) {
