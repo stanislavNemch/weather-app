@@ -7,17 +7,6 @@ import { getRandomQuote } from './forismatic-api.js';
 
 // Пути указываются относительно render-functions.js, то есть два уровня вверх до src/, затем вниз до img/
 import iconsSvg from '../img/icons.svg';
-import sunIcon01d from '../img/icon/sun-weather.png';
-import sunIcon01n from '../img/icon/01n.png';
-import fewCloudsDay from '../img/icon/02d.png';
-import fewCloudsNight from '../img/icon/02n.png';
-import cloudyGeneric from '../img/icon/cloudy.png';
-import rainIcon09d from '../img/icon/09d.png';
-import rainIcon10d from '../img/icon/rain.png';
-import stormIcon from '../img/icon/storm.png';
-import snowIcon from '../img/icon/snow.png';
-import fogIcon from '../img/icon/fog.png';
-import defaultIcon from '../img/icon/default.png';
 
 // Елементи DOM, необхідні для рендерингу
 //const weatherApp = document.querySelector('.weather-app');
@@ -40,29 +29,29 @@ const quoteAuthorElement = document.getElementById('quote-author');
 
 // Словарь IMG-иконок по коду OpenWeatherMap
 const weatherIcons = {
-  '01d': sunIcon01d, // Иконка для ясного неба днем
-  '01n': sunIcon01n, // Иконка для ясного неба ночью
-  '02d': fewCloudsDay, // Иконка для небольшой облачности днем
-  '02n': fewCloudsNight, // Иконка для небольшой облачности ночью
-  '03d': cloudyGeneric, // Иконка для рассеянных облаков днем
-  '03n': cloudyGeneric, // Иконка для рассеянных облаков ночью
-  '04d': cloudyGeneric, // Иконка для разорванных облаков днем
-  '04n': cloudyGeneric, // Иконка для разорванных облаков ночью
-  '09d': rainIcon09d, // Иконка для ливня днем
-  '09n': rainIcon09d, // Иконка для ливня ночью (используем ту же, если нет специфической)
-  '10d': rainIcon10d, // Иконка для дождя днем
-  '10n': rainIcon10d, // Иконка для дождя ночью
-  '11d': stormIcon, // Иконка для грозы днем
-  '11n': stormIcon, // Иконка для грозы ночью
-  '13d': snowIcon, // Иконка для снега днем
-  '13n': snowIcon, // Иконка для снега ночью
-  '50d': fogIcon, // Иконка для тумана днем
-  '50n': fogIcon, // Иконка для тумана ночью
+  '01d': 'img/icon/sun-weather.png',
+  '01n': 'img/icon/01n.png',
+  '02d': 'img/icon/010-clouds-and-sun.png',
+  '02n': 'img/icon/010-clouds-and-sun.png',
+  '03d': 'img/icon/cloudy.png',
+  '03n': 'img/icon/cloudy.png',
+  '04d': 'img/icon/cloudy.png',
+  '04n': 'img/icon/cloudy.png',
+  '09d': 'img/icon/09d.png',
+  '09n': 'img/icon/09n.png',
+  '10d': 'img/icon/rain.png',
+  '10n': 'img/icon/rain.png',
+  '11d': 'img/icon/storm.png',
+  '11n': 'img/icon/storm.png',
+  '13d': 'img/icon/snow.png',
+  '13n': 'img/icon/snow.png',
+  '50d': 'img/icon/fog.png',
+  '50n': 'img/icon/fog.png',
 };
 // Функция для получения IMG-иконки по коду
 function getWeatherIconImg(iconCode) {
   //console.log('Icon code:', iconCode); // Для отладки
-  const src = weatherIcons[iconCode] || defaultIcon;
+  const src = weatherIcons[iconCode] || 'img/icon/default.png';
   return `<img src="${src}" width="48" height="48" alt="weather icon">`;
 }
 

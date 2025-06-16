@@ -417,34 +417,28 @@
   }
 
   .sun-times {
-    font-weight: 400;
     font-size: 18px;
-    letter-spacing: 0.04em;
     bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
-    width: auto; /* Убираем фиксированную ширину */
   }
 
   .date {
-    font-weight: 300;
     font-size: 60px;
-    letter-spacing: 0.04em;
-    position: absolute;
-    top: 25px;
     left: 50%;
     transform: translateX(-50%);
     width: auto; /* Убираем фиксированную ширину */
   }
 
   .month-time-container {
-    font-weight: 400;
-    font-size: 18px;
-    letter-spacing: 0.04em;
     top: 110px;
     left: 52%;
     transform: translateX(-50%);
     width: auto;
+  }
+  .month,
+  .time {
+    font-size: 18px;
   }
 
   .weather-display {
@@ -491,13 +485,6 @@
     min-height: 100vh;
   }
 
-  .month-time-container {
-    top: 120px; /* Позиция ниже даты */
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto; /* Убираем фиксированную ширину */
-  }
-
   .header-search {
     width: 100%;
     max-width: 822px;
@@ -517,7 +504,6 @@
     top: 252px;
     right: -20px;
     left: auto;
-    box-sizing: border-box;
     padding: 0;
   }
 
@@ -542,8 +528,33 @@
     left: 0;
     bottom: 0;
     margin: 0;
-    width: 624px;
     height: 264px;
+    width: 624px;
+  }
+
+  .date {
+    font-size: 90px;
+    left: 16px;
+    top: 100px;
+    transform: translateY(-50%);
+    margin-bottom: 16px;
+  }
+
+  .day-of-week {
+    font-size: 90px;
+  }
+
+  .month-time-container {
+    top: 178px;
+    left: 10px;
+    transform: translateY(-50%);
+    padding-left: 20px;
+  }
+
+  .sun-times {
+    margin-left: 136px;
+    top: 168px;
+    transform: translateX(-50%);
   }
 
   .quote {
@@ -553,11 +564,5 @@
   .romb {
     top: 100px;
     right: 500px; /* Adjust as per desktop image */
-  }
-
-  /* Ensure dividers are hidden on desktop */
-  .month-day-divider,
-  .sun-time-divider {
-    display: none;
   }
 }

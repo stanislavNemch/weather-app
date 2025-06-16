@@ -14,7 +14,8 @@
     "glob": "^11.0.3",
     "postcss": "^8.5.5",
     "postcss-sort-media-queries": "^5.2.0",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vite-plugin-static-copy": "^3.0.2"
   },
   "author": "Stanislav Nemchenko <stas.buka@gmail.com>",
   "license": "ISC",
