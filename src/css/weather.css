@@ -132,7 +132,7 @@
   border-radius: 34px;
   box-shadow: 0 5px 33px 0 rgba(16, 33, 54, 0.6);
   background: #102136;
-  margin-bottom: 33px;
+  margin-bottom: 32px;
 
   /* Изменения для мобильной версии */
   display: flex;
@@ -619,7 +619,6 @@
 
 /* Для вида "Сегодня" отступ снизу для вкладок */
 #today-view-container .forecast-tabs {
-  margin-top: 33px;
   margin-bottom: 32px;
 }
 
