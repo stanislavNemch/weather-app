@@ -7,10 +7,10 @@ import { getRandomQuote } from './forismatic-api.js';
 
 // Пути указываются относительно render-functions.js, то есть два уровня вверх до src/, затем вниз до img/
 import iconsSvg from '../img/icons.svg'; // Путь из src/js к src/img
-import sunIcon01d from '../img/icon/002-sun.png';
+import sunIcon01d from '../img/icon/sun.png';
 import sunIcon01n from '../img/icon/01n.png';
-import cloudsAndSunIcon from '../img/icon/010-clouds-and-sun.png';
-import cloudyIcon from '../img/icon/001-cloudy.png';
+import cloudsAndSunIcon from '../img/icon/02d.png';
+import cloudyIcon from '../img/icon/cloudy.png';
 import rainIcon09d from '../img/icon/09d.png';
 import rainIcon10d from '../img/icon/rain.png';
 import stormIcon from '../img/icon/storm.png';
