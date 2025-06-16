@@ -25,7 +25,6 @@
         </button>
       </div>
       <div class="city-tags" id="city-tags-container">
-        <!-- Міста будуть додані тут -->
         <button class="city-tags-toggle" id="city-tags-toggle" aria-label="Показать все города" style="display:none;">
           <svg class="arrow-left" width="28" height="28">
             <use href="/img/icons.svg#arrow-left"></use>
@@ -34,84 +33,95 @@
       </div>
     </div>
 
-    <div class="weather-display">
-      <div class="current-weather">
-        <div class="weather-icon">
-        </div>
-        <div class="location">Kyiv, UA</div>
-        <div class="temperature-and-minmax">
-          <div class="temperature">-3°</div>
-          <div class="min-max">
-            <div class="min-col">
-              <span class="min-label">min</span>
-              <span class="min-temp">-2°</span>
-            </div>
-            <span class="minmax-divider">
-              <svg width="1" height="40">
-                <use href="/img/icons.svg#vertical-line"></use>
-              </svg>
-            </span>
-            <div class="max-col">
-              <span class="max-label">max</span>
-              <span class="max-temp">1°</span>
+    <div id="today-view-container">
+      <div class="weather-display">
+        <div class="current-weather">
+          <div class="weather-icon"></div>
+          <div class="location">Kyiv, UA</div>
+          <div class="temperature-and-minmax">
+            <div class="temperature">-3°</div>
+            <div class="min-max">
+              <div class="min-col">
+                <span class="min-label">min</span>
+                <span class="min-temp">-2°</span>
+              </div>
+              <span class="minmax-divider">
+                <svg width="1" height="40">
+                  <use href="/img/icons.svg#vertical-line"></use>
+                </svg>
+              </span>
+              <div class="max-col">
+                <span class="max-label">max</span>
+                <span class="max-temp">1°</span>
+              </div>
             </div>
           </div>
         </div>
+        <div class="forecast-tabs">
+          <button class="tab-button active" id="today-tab-today-view">
+            Сьогодні
+          </button>
+          <button class="tab-button" id="5-days-tab-today-view">5 днів</button>
+        </div>
       </div>
-
-      <div class="forecast-tabs">
-        <button class="tab-button active" id="today-tab">Сьогодні</button>
-        <button class="tab-button" id="5-days-tab">5 днів</button>
+      <div class="date-time-info">
+        <div class="date">
+          <span class="date-number">8<sup>th</sup></span>
+          <span class="day-of-week">Sat</span>
+        </div>
+        <div class="month-time-container">
+          <div class="month">February</div>
+          <span class="month-day-divider">
+            <svg width="1" height="22">
+              <use href="/img/icons.svg#vertical-line"></use>
+            </svg>
+          </span>
+          <div class="time">21:30:56</div>
+        </div>
+        <div class="sun-times">
+          <span class="sunrise">
+            <svg width="24" height="24">
+              <use href="/img/icons.svg#sunrise"></use>
+            </svg>
+            07:04
+          </span>
+          <span class="sun-time-divider">
+            <svg width="1" height="22">
+              <use href="/img/icons.svg#vertical-line"></use>
+            </svg>
+          </span>
+          <span class="sunset">
+            <svg width="24" height="24">
+              <use href="/img/icons.svg#sunset"></use>
+            </svg>
+            17:05
+          </span>
+        </div>
       </div>
-
-      <div class="five-day-forecast-container" style="display: none;">
+      <div class="quote">
+        <p id="quote-text"></p>
+        <p id="quote-author" class="author"></p>
       </div>
     </div>
 
-    <div class="date-time-info">
-      <div class="date">
-        <span class="date-number">8<sup>th</sup></span>
-        <span class="day-of-week">Sat</span>
+    <div id="five-day-view-container" style="display: none">
+      <div class="five-day-header">
+        <h2 id="forecast-header-city"></h2>
+        <div class="forecast-tabs">
+          <button class="tab-button" id="today-tab-five-day-view">
+            Сьогодні
+          </button>
+          <button class="tab-button active" id="5-days-tab-five-day-view">
+            5 днів
+          </button>
+        </div>
       </div>
-      <div class="month-time-container">
-        <div class="month">February</div>
-        <span class="month-day-divider">
-          <svg width="1" height="22">
-            <use href="/img/icons.svg#vertical-line"></use>
-          </svg>
-        </span>
-        <div class="time">21:30:56</div>
+      <div class="five-day-forecast-container">
       </div>
-      <div class="sun-times">
-        <span class="sunrise">
-          <svg width="24" height="24">
-            <use href="/img/icons.svg#sunrise"></use>
-          </svg>
-          07:04
-        </span>
-        <span class="sun-time-divider">
-          <svg width="1" height="22">
-            <use href="/img/icons.svg#vertical-line"></use>
-          </svg>
-        </span>
-        <span class="sunset">
-          <svg width="24" height="24">
-            <use href="/img/icons.svg#sunset"></use>
-          </svg>
-          17:05
-        </span>
-      </div>
-    </div>
-
-    <div class="quote">
-      <p id="quote-text"></p>
-      <p id="quote-author" class="author"></p>
     </div>
 
     <div class="romb romb-left"></div>
     <div class="romb romb-right"></div>
-
-    <!-- Loader element -->
     <div id="loader" class="loader"></div>
   </div>
   <script type="module" src="./main.js"></script>

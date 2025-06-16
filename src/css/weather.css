@@ -399,89 +399,8 @@
   z-index: -1;
 }
 
-/* Styles for 5-day forecast */
-.five-day-forecast-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
-  color: var(--text-light);
-  margin-top: 24px;
-}
-
-.forecast-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(16, 33, 54, 0.8);
-  border-radius: 18px;
-  padding: 12px 18px;
-}
-
-.forecast-day-of-week {
-  font-weight: 700;
-  font-size: 14px;
-  width: 90px;
-  text-transform: capitalize;
-}
-
-.forecast-date {
-  font-weight: 400;
-  font-size: 14px;
-  color: #767d85;
-  width: 70px;
-}
-
-.forecast-icon {
-  width: 50px;
-  display: flex;
-  justify-content: center;
-}
-
-.forecast-icon img {
-  width: 48px;
-  height: 48px;
-}
-
-.forecast-temps {
-  display: flex;
-  gap: 12px;
-  width: 100px;
-  justify-content: flex-start;
-}
-
-.forecast-min,
-.forecast-max {
-  font-size: 14px;
-  color: #767d85;
-}
-
-.forecast-min span,
-.forecast-max span {
-  font-weight: 700;
-  font-size: 16px;
-  color: var(--text-light);
-  margin-left: 4px;
-}
-
-.forecast-more-info {
-  font-weight: 400;
-  font-size: 14px;
-  text-decoration: underline;
-  text-decoration-skip-ink: none;
-  color: #767d85;
-  cursor: pointer;
-  background: none;
-  border: none;
-}
-
 /* Tablet styles */
 @media screen and (min-width: 768px) {
-  .five-day-forecast-container {
-    max-width: 680px;
-    margin: 24px auto 0;
-  }
-
   .date-time-info {
     min-width: 600px;
     margin: 0 auto;
@@ -584,13 +503,8 @@
 
 /* Desktop styles */
 @media screen and (min-width: 1280px) {
-  .five-day-forecast-container {
-    position: absolute;
-    top: 350px;
-    right: -20px;
-    left: auto;
-    width: 411px;
-    padding: 0;
+  body {
+    min-height: 100vh;
   }
 
   .header-search {
@@ -677,5 +591,105 @@
   .romb-right {
     top: -160px;
     left: 83%;
+  }
+}
+
+/* UPDATED STYLES FOR FORECAST VIEW */
+
+#five-day-view-container {
+  display: block; /* Изменено для корректной работы дочерних элементов */
+  width: 100%;
+}
+
+.five-day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1248px;
+  margin: 32px auto 24px;
+  padding: 0 15px;
+}
+
+#forecast-header-city {
+  color: var(--text-light);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* Для вида "Сегодня" отступ снизу для вкладок */
+#today-view-container .forecast-tabs {
+  margin-top: 33px;
+  margin-bottom: 32px;
+}
+
+.five-day-forecast-container {
+  border-radius: 34px;
+  box-shadow: 0 8px 43px 0 rgba(16, 33, 54, 0.6);
+  background: rgba(16, 33, 54, 0.8);
+  width: 100%;
+  max-width: 1248px;
+  min-height: 307px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 10px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.forecast-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  color: var(--text-light);
+  width: 120px;
+}
+.forecast-card .forecast-day-of-week {
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: capitalize;
+}
+.forecast-card .forecast-date {
+  font-weight: 400;
+  font-size: 16px;
+  color: #767d85;
+}
+.forecast-card .forecast-icon img {
+  width: 56px;
+  height: 56px;
+}
+.forecast-min-max {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.forecast-min-max .temp-value {
+  font-weight: 700;
+  font-size: 20px;
+}
+.forecast-min-max .label {
+  font-size: 16px;
+  color: #767d85;
+  margin-bottom: 4px;
+}
+.forecast-card .forecast-more-info {
+  font-weight: 400;
+  font-size: 14px;
+  text-decoration: underline;
+  color: #767d85;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+/* Адаптация для мобильных устройств */
+@media screen and (max-width: 767px) {
+  .five-day-header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
   }
 }

@@ -9,62 +9,44 @@ import {
   updateBackground,
 } from './js/render-functions.js';
 
-// Елементи DOM
+// DOM-элементы
 const cityInput = document.getElementById('city-input');
 const addCityButton = document.getElementById('add-city-button');
-const timeElement = document.querySelector('.date-time-info .time');
-const todayTabButton = document.getElementById('today-tab');
-const fiveDaysTabButton = document.getElementById('5-days-tab');
 const loaderElement = document.getElementById('loader');
 
-// Контейнеры для переключения видимости
-const currentWeatherContainer = document.querySelector('.current-weather');
-const dateTimeInfoContainer = document.querySelector('.date-time-info');
-const fiveDayForecastContainer = document.querySelector(
-  '.five-day-forecast-container'
+// Контейнеры видов
+const todayViewContainer = document.getElementById('today-view-container');
+const fiveDayViewContainer = document.getElementById('five-day-view-container');
+
+// Получаем все 4 кнопки вкладок
+const todayTabTodayView = document.getElementById('today-tab-today-view');
+const fiveDaysTabTodayView = document.getElementById('5-days-tab-today-view');
+const todayTabFiveDayView = document.getElementById('today-tab-five-day-view');
+const fiveDaysTabFiveDayView = document.getElementById(
+  '5-days-tab-five-day-view'
 );
-const quoteContainer = document.querySelector('.quote'); // 1. Получаем ссылку на блок с цитатой
 
-// Масив для зберігання доданих міст
 let cities = JSON.parse(localStorage.getItem('weatherCities')) || ['Kyiv'];
-let currentCity = cities[0] || 'Kyiv'; // Поточне відображуване місто
+let currentCity = cities[0] || 'Kyiv';
 
-/**
- * Показує індикатор завантаження.
- */
+// --- Функции загрузки и рендеринга ---
 function showLoader() {
   loaderElement.style.display = 'block';
 }
-
-/**
- * Ховає індикатор завантаження.
- */
 function hideLoader() {
   loaderElement.style.display = 'none';
 }
-
-/**
- * Асинхронна функція для отримання та відображення даних про погоду "Сьогодні".
- * @param {string} city - Місто для запиту.
- */
 async function fetchAndDisplayWeather(city) {
   showLoader();
   try {
     const weatherData = await getWeatherData(city);
-    if (weatherData) {
-      updateWeatherUI(weatherData, city);
-    }
+    if (weatherData) updateWeatherUI(weatherData, city);
   } catch (error) {
-    // Ошибки уже обработаны
+    console.error(error);
   } finally {
     hideLoader();
   }
 }
-
-/**
- * Асинхронна функція для отримання та відображення прогнозу на 5 днів.
- * @param {string} city - Місто для запиту.
- */
 async function fetchAndDisplayFiveDayForecast(city) {
   showLoader();
   try {
@@ -80,37 +62,56 @@ async function fetchAndDisplayFiveDayForecast(city) {
   }
 }
 
-/**
- * Функція для обробки кліку по тегу міста.
- * @param {string} city - Місто, на яке клікнули.
- */
+// --- Функции управления видами ---
+function showTodayView() {
+  if (todayTabTodayView.classList.contains('active')) return;
+
+  todayTabTodayView.classList.add('active');
+  fiveDaysTabTodayView.classList.remove('active');
+  todayTabFiveDayView.classList.add('active');
+  fiveDaysTabFiveDayView.classList.remove('active');
+
+  fiveDayViewContainer.style.display = 'none';
+  todayViewContainer.style.display = 'block';
+
+  fetchAndDisplayWeather(currentCity);
+}
+
+function showFiveDayView() {
+  if (fiveDaysTabTodayView.classList.contains('active')) return;
+
+  todayTabTodayView.classList.remove('active');
+  fiveDaysTabTodayView.classList.add('active');
+  todayTabFiveDayView.classList.remove('active');
+  fiveDaysTabFiveDayView.classList.add('active');
+
+  todayViewContainer.style.display = 'none';
+  fiveDayViewContainer.style.display = 'block';
+
+  fetchAndDisplayFiveDayForecast(currentCity);
+}
+
+// --- Функции управления городами ---
 function handleCityClick(city) {
   currentCity = city;
-  if (fiveDaysTabButton.classList.contains('active')) {
+  if (fiveDaysTabTodayView.classList.contains('active')) {
     fetchAndDisplayFiveDayForecast(city);
   } else {
     fetchAndDisplayWeather(city);
   }
 }
-
-/**
- * Функція для додавання нового міста до списку та оновлення тегів.
- */
 function addCity() {
   const newCity = cityInput.value.trim();
-
   if (!newCity || newCity.split(' ').join('').length === 0) {
     showNotification('Поле вводу міста не може бути порожнім.', 'error');
     cityInput.value = '';
     return;
   }
-
   if (cities.some(city => city.toLowerCase() === newCity.toLowerCase())) {
     showNotification('Це місто вже додано.', 'warning');
     cityInput.value = '';
     return;
   }
-
   showLoader();
   getWeatherData(newCity)
     .then(data => {
@@ -120,7 +121,7 @@ function addCity() {
         renderCityTags(cities, handleCityClick, handleCityRemove);
         cityInput.value = '';
         currentCity = newCity;
-        todayTabButton.click();
+        showTodayView();
       }
     })
     .catch(error => {
@@ -137,77 +138,53 @@ function addCity() {
       }
       cityInput.value = '';
     })
-    .finally(() => {
-      hideLoader();
-    });
+    .finally(() => hideLoader());
 }
-
-/**
- * Функція для видалення міста зі списку та оновлення тегів.
- * @param {string} cityToRemove - Місто, яке потрібно видалити.
- */
 function handleCityRemove(cityToRemove) {
   cities = cities.filter(
     city => city.toLowerCase() !== cityToRemove.toLowerCase()
   );
   localStorage.setItem('weatherCities', JSON.stringify(cities));
   renderCityTags(cities, handleCityClick, handleCityRemove);
-
   if (currentCity.toLowerCase() === cityToRemove.toLowerCase()) {
     currentCity = cities.length > 0 ? cities[0] : 'Kyiv';
     handleCityClick(currentCity);
   }
 }
 
-// Обробники подій
+// --- Инициализация ---
+// Назначаем обработчики на все 4 кнопки
+todayTabTodayView.addEventListener('click', showTodayView);
+todayTabFiveDayView.addEventListener('click', showTodayView);
+fiveDaysTabTodayView.addEventListener('click', showFiveDayView);
+fiveDaysTabFiveDayView.addEventListener('click', showFiveDayView);
+
 addCityButton.addEventListener('click', addCity);
 cityInput.addEventListener('keypress', e => {
-  if (e.key === 'Enter') {
-    addCity();
-  }
+  if (e.key === 'Enter') addCity();
 });
 
-todayTabButton.addEventListener('click', () => {
-  if (todayTabButton.classList.contains('active')) return;
-
-  todayTabButton.classList.add('active');
-  fiveDaysTabButton.classList.remove('active');
-
-  fiveDayForecastContainer.style.display = 'none';
-  currentWeatherContainer.style.display = 'flex';
-  dateTimeInfoContainer.style.display = 'flex';
-  quoteContainer.style.display = 'block'; // 3. Показываем цитату
-
-  fetchAndDisplayWeather(currentCity);
-});
-
-fiveDaysTabButton.addEventListener('click', () => {
-  if (fiveDaysTabButton.classList.contains('active')) return;
-
-  fiveDaysTabButton.classList.add('active');
-  todayTabButton.classList.remove('active');
-
-  currentWeatherContainer.style.display = 'none';
-  dateTimeInfoContainer.style.display = 'none';
-  fiveDayForecastContainer.style.display = 'flex';
-  quoteContainer.style.display = 'none'; // 2. Скрываем цитату
-
-  fetchAndDisplayFiveDayForecast(currentCity);
-});
-
-// Ініціалізація при завантаженні сторінки
 document.addEventListener('DOMContentLoaded', () => {
+  const timeElement = document.querySelector('.date-time-info .time');
+
   renderCityTags(cities, handleCityClick, handleCityRemove);
+
+  // ======================= ИСПРАВЛЕНИЕ ЗДЕСЬ =======================
+  // Прямой вызов для загрузки погоды и фона при первой загрузке
   fetchAndDisplayWeather(currentCity);
+  // =================================================================
+
   updateQuoteDisplay();
-  setInterval(() => {
-    const now = new Date();
-    const formattedTime = now.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hourCycle: 'h23',
-    });
-    timeElement.textContent = formattedTime;
-  }, 1000);
+
+  if (timeElement) {
+    setInterval(() => {
+      const now = new Date();
+      timeElement.textContent = now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hourCycle: 'h23',
+      });
+    }, 1000);
+  }
 });
