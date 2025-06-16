@@ -225,3 +225,88 @@ export async function updateQuoteDisplay() {
     quoteAuthorElement.textContent = 'Steve Jobs';
   }
 }
+
+/**
+ * Обрабатывает сырые данные прогноза, группируя их по дням.
+ * @param {object} forecastData - Данные из API.
+ * @returns {object} - Объект, где ключ - дата, а значение - массив погоды за этот день.
+ */
+function processForecastData(forecastData) {
+  const dailyData = {};
+  forecastData.list.forEach(item => {
+    const date = item.dt_txt.split(' ')[0]; // Получаем только дату (YYYY-MM-DD)
+    if (!dailyData[date]) {
+      dailyData[date] = [];
+    }
+    dailyData[date].push(item);
+  });
+  return dailyData;
+}
+
+/**
+ * Вычисляет мин/макс температуру и определяет иконку для каждого дня.
+ * @param {object} dailyData - Сгруппированные по дням данные.
+ * @returns {Array<object>} - Массив объектов с данными для каждого дня.
+ */
+function aggregateDailyData(dailyData) {
+  return Object.keys(dailyData)
+    .map(date => {
+      const dayMeasurements = dailyData[date];
+      const temp_min = Math.min(...dayMeasurements.map(m => m.main.temp_min));
+      const temp_max = Math.max(...dayMeasurements.map(m => m.main.temp_max));
+
+      // Для иконки возьмем прогноз на полдень (12:00)
+      const middayMeasurement =
+        dayMeasurements.find(m => m.dt_txt.includes('12:00:00')) ||
+        dayMeasurements[0]; // или первый попавшийся, если 12:00 нет
+
+      return {
+        date: new Date(date),
+        temp_min: Math.round(temp_min),
+        temp_max: Math.round(temp_max),
+        icon: middayMeasurement.weather[0].icon,
+      };
+    })
+    .slice(0, 5); // Оставляем только 5 дней
+}
+
+/**
+ * Рендерит карточки прогноза на 5 дней.
+ * @param {Array<object>} aggregatedData - Массив обработанных данных на 5 дней.
+ */
+export function renderFiveDayForecast(forecastData) {
+  const container = document.querySelector('.five-day-forecast-container');
+  if (!container) return;
+
+  const dailyData = processForecastData(forecastData);
+  const aggregatedData = aggregateDailyData(dailyData);
+
+  container.innerHTML = ''; // Очищаем контейнер перед рендерингом
+
+  aggregatedData.forEach(day => {
+    const dayOfWeek = day.date.toLocaleDateString('en-US', {
+      weekday: 'long',
+    });
+    const dayOfMonth = day.date.toLocaleDateString('en-US', {
+      day: 'numeric',
+      month: 'short',
+    });
+
+    const card = document.createElement('div');
+    card.classList.add('forecast-card');
+
+    card.innerHTML = `
+      <p class="forecast-day-of-week">${dayOfWeek}</p>
+      <p class="forecast-date">${dayOfMonth}</p>
+      <div class="forecast-icon">
+        ${getWeatherIconImg(day.icon)}
+      </div>
+      <div class="forecast-temps">
+        <p class="forecast-min">min <span>${day.temp_min}°</span></p>
+        <p class="forecast-max">max <span>${day.temp_max}°</span></p>
+      </div>
+      <button class="forecast-more-info">more info</button>
+    `;
+    container.appendChild(card);
+  });
+}

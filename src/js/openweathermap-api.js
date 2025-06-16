@@ -27,3 +27,29 @@ export async function getWeatherData(city) {
     throw error; // Перебрасываем ошибку для обработки в main.js
   }
 }
+
+/**
+ * Асинхронная функция для получения прогноза погоды на 5 дней.
+ * @param {string} city - Название города.
+ * @returns {Promise<object|null>} - Объект данных о прогнозе или null в случае ошибки.
+ */
+export async function getFiveDayForecast(city) {
+  try {
+    const response = await fetch(
+      `${OPENWEATHER_BASE_URL}forecast?q=${city}&appid=${OPENWEATHER_API_KEY}&units=metric`
+    );
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error(`City not found for forecast: ${city}`);
+      } else {
+        throw new Error(
+          `Failed to fetch 5-day forecast data: ${response.statusText}`
+        );
+      }
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching 5-day forecast:', error);
+    throw error;
+  }
+}
