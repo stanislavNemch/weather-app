@@ -378,16 +378,25 @@
 }
 
 .romb {
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  width: 112px;
+  height: 112px;
+  transform: rotate(60deg);
+}
+
+.romb-left {
   position: absolute;
-  border: 4px solid var(--border-color);
-  border-radius: 30px;
-  width: 197px;
-  height: 197px;
-  transform: rotate(30deg);
-  top: -50px; /* Adjust based on image */
-  right: -50px; /* Adjust based on image */
+  top: 0;
+  right: 90%;
   z-index: -1;
-  display: none; /* Скрыто на мобильных по умолчанию */
+}
+
+.romb-right {
+  position: absolute;
+  top: 0;
+  left: 85%;
+  z-index: -1;
 }
 
 /* Tablet styles */
@@ -404,7 +413,8 @@
   }
 
   .search-bar {
-    width: 100%;
+    max-width: 700px;
+    margin-left: 16px;
   }
 
   .search-bar input {
@@ -414,6 +424,7 @@
   .city-tags {
     max-width: 600px;
     margin-bottom: 106px;
+    margin-left: 48px;
   }
 
   .sun-times {
@@ -473,9 +484,20 @@
   }
 
   .romb {
-    display: block; /* Показать на планшетах */
-    top: 20px;
-    right: 20px;
+    border: 4px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    width: 197px;
+    height: 197px;
+  }
+
+  .romb-left {
+    top: -5%;
+    right: 93%;
+  }
+
+  .romb-right {
+    top: -2%;
+    left: 85%;
   }
 }
 
@@ -496,7 +518,7 @@
 
   .city-tags {
     align-self: flex-start;
-    margin-left: 0;
+    margin-left: 96px;
   }
 
   .weather-display {
@@ -561,8 +583,13 @@
     bottom: 50px;
   }
 
-  .romb {
-    top: 100px;
-    right: 500px; /* Adjust as per desktop image */
+  .romb-left {
+    top: 106px;
+    left: -42px;
+  }
+
+  .romb-right {
+    top: -160px;
+    left: 83%;
   }
 }
