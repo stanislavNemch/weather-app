@@ -1,4 +1,3 @@
-// Импортируем функции из других модулей
 import { getWeatherData, getFiveDayForecast } from './js/openweathermap-api.js';
 import {
   updateWeatherUI,
@@ -10,15 +9,16 @@ import {
 } from './js/render-functions.js';
 
 // DOM-элементы
+const weatherApp = document.querySelector('.weather-app');
 const cityInput = document.getElementById('city-input');
 const addCityButton = document.getElementById('add-city-button');
 const loaderElement = document.getElementById('loader');
 
-// Контейнеры видов
+// Контейнери видів
 const todayViewContainer = document.getElementById('today-view-container');
 const fiveDayViewContainer = document.getElementById('five-day-view-container');
 
-// Получаем все 4 кнопки вкладок
+// Отримуємо всі 4 кнопки вкладок
 const todayTabTodayView = document.getElementById('today-tab-today-view');
 const fiveDaysTabTodayView = document.getElementById('5-days-tab-today-view');
 const todayTabFiveDayView = document.getElementById('today-tab-five-day-view');
@@ -29,7 +29,7 @@ const fiveDaysTabFiveDayView = document.getElementById(
 let cities = JSON.parse(localStorage.getItem('weatherCities')) || ['Kyiv'];
 let currentCity = cities[0] || 'Kyiv';
 
-// --- Функции загрузки и рендеринга ---
+// --- Функції завантаження ---
 function showLoader() {
   loaderElement.style.display = 'block';
 }
@@ -51,10 +51,7 @@ async function fetchAndDisplayFiveDayForecast(city) {
   showLoader();
   try {
     const forecastData = await getFiveDayForecast(city);
-    if (forecastData) {
-      updateBackground(city);
-      renderFiveDayForecast(forecastData);
-    }
+    if (forecastData) renderFiveDayForecast(forecastData);
   } catch (error) {
     showNotification(`Не вдалося отримати прогноз для міста ${city}.`, 'error');
   } finally {
@@ -62,8 +59,9 @@ async function fetchAndDisplayFiveDayForecast(city) {
   }
 }
 
-// --- Функции управления видами ---
+// --- Функції керування видами ---
 function showTodayView() {
+  weatherApp.classList.remove('five-day-layout-active');
   if (todayTabTodayView.classList.contains('active')) return;
 
   todayTabTodayView.classList.add('active');
@@ -78,6 +76,7 @@ function showTodayView() {
 }
 
 function showFiveDayView() {
+  weatherApp.classList.add('five-day-layout-active');
   if (fiveDaysTabTodayView.classList.contains('active')) return;
 
   todayTabTodayView.classList.remove('active');
@@ -86,14 +85,20 @@ function showFiveDayView() {
   fiveDaysTabFiveDayView.classList.add('active');
 
   todayViewContainer.style.display = 'none';
-  fiveDayViewContainer.style.display = 'block';
+
+  // ======================= ВИПРАВЛЕННЯ ТУТ =======================
+  // Встановлюємо 'flex' замість 'block', щоб активувати верстку з CSS
+  fiveDayViewContainer.style.display = 'flex';
+  // ===============================================================
 
   fetchAndDisplayFiveDayForecast(currentCity);
 }
 
-// --- Функции управления городами ---
+// --- Функції керування містами ---
 function handleCityClick(city) {
   currentCity = city;
+  updateBackground(city);
+
   if (fiveDaysTabTodayView.classList.contains('active')) {
     fetchAndDisplayFiveDayForecast(city);
   } else {
@@ -116,6 +121,7 @@ function addCity() {
   getWeatherData(newCity)
     .then(data => {
       if (data) {
+        updateBackground(newCity);
         cities.push(newCity);
         localStorage.setItem('weatherCities', JSON.stringify(cities));
         renderCityTags(cities, handleCityClick, handleCityRemove);
@@ -152,8 +158,7 @@ function handleCityRemove(cityToRemove) {
   }
 }
 
-// --- Инициализация ---
-// Назначаем обработчики на все 4 кнопки
+// --- Ініціалізація ---
 todayTabTodayView.addEventListener('click', showTodayView);
 todayTabFiveDayView.addEventListener('click', showTodayView);
 fiveDaysTabTodayView.addEventListener('click', showFiveDayView);
@@ -166,9 +171,9 @@ cityInput.addEventListener('keypress', e => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const timeElement = document.querySelector('.date-time-info .time');
-
   renderCityTags(cities, handleCityClick, handleCityRemove);
 
+  updateBackground(currentCity);
   fetchAndDisplayWeather(currentCity);
 
   updateQuoteDisplay();

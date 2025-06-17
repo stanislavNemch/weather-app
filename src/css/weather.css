@@ -223,7 +223,6 @@
   justify-content: center;
   flex-direction: row;
   gap: 18px;
-  margin-bottom: 32px;
 }
 
 .tab-button {
@@ -596,25 +595,46 @@
 
 /* UPDATED STYLES FOR FORECAST VIEW */
 
+.weather-app.five-day-layout-active {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Вирівнюємо все по верху, щоб flex-grow спрацював */
+}
+
 #five-day-view-container {
   display: block; /* Изменено для корректной работы дочерних элементов */
   width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Вирівнюємо вміст по нижньому краю */
+  padding-bottom: 50px; /* Додаємо відступ знизу для краси */
+  box-sizing: border-box; /* Важливо для коректного розрахунку висоти */
 }
 
 .five-day-header {
+  position: relative; /* Встановлюємо відносне позиціонування для батьківського блоку */
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end; /* Притискаємо вкладки до правого краю */
   align-items: center;
   width: 100%;
   max-width: 1248px;
-  margin: 32px auto 24px;
+  margin: 32px auto 32px;
   padding: 0 15px;
 }
 
 #forecast-header-city {
+  position: absolute; /* Абсолютне позиціонування відносно .five-day-header */
+  left: 50%; /* Зміщуємо на 50% вліво від краю батьківського елемента */
+  transform: translateX(
+    -50%
+  ); /* Центруємо точно по горизонталі, зміщуючи на половину своєї ширини */
   color: var(--text-light);
   font-size: 32px;
   font-weight: 700;
+  /* Додамо властивості, щоб текст не накладався на кнопки */
+  padding: 0 150px; /* Залишаємо місце з боків */
+  white-space: nowrap; /* Забороняємо перенос рядка */
 }
 
 /* Для вида "Сегодня" отступ снизу для вкладок */
