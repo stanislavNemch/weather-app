@@ -44,6 +44,7 @@ const weatherIcons = {
 };
 
 function getWeatherIconImg(iconCode) {
+  console.log('Icon code:', iconCode);
   const src = weatherIcons[iconCode] || 'img/icon/default.png';
   return `<img src="${src}" width="48" height="48" alt="weather icon">`;
 }
