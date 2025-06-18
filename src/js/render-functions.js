@@ -244,7 +244,11 @@ export function renderFiveDayForecast(forecastData) {
           <p class="label">min</p>
           <p class="temp-value">${day.temp_min}°</p>
         </div>
-        <div class="divider">|</div>
+        <span class="minmax-divider">
+                <svg width="1" height="40">
+                  <use href="/img/icons.svg#vertical-line"></use>
+                </svg>
+        </span>
         <div>
           <p class="label">max</p>
           <p class="temp-value">${day.temp_max}°</p>

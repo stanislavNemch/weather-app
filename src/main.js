@@ -214,3 +214,25 @@ document.addEventListener('DOMContentLoaded', () => {
     rightArrow.addEventListener('click', () => scrollForecast('right'));
   }
 });
+
+function moveForecastHeaderCity() {
+  const header = document.getElementById('forecast-header-city');
+  const forecastWrapper = document.querySelector('.five-day-forecast-wrapper');
+  const fiveDayHeader = document.querySelector('.five-day-header');
+  if (!header || !forecastWrapper || !fiveDayHeader) return;
+
+  if (window.innerWidth <= 767) {
+    // Вставить в начало five-day-forecast-wrapper, если ещё не там
+    if (forecastWrapper.firstElementChild !== header) {
+      forecastWrapper.insertBefore(header, forecastWrapper.firstChild);
+    }
+  } else {
+    // Вернуть обратно в five-day-header, если ещё не там
+    if (!fiveDayHeader.contains(header)) {
+      fiveDayHeader.insertBefore(header, fiveDayHeader.firstChild);
+    }
+  }
+}
+
+window.addEventListener('DOMContentLoaded', moveForecastHeaderCity);
+window.addEventListener('resize', moveForecastHeaderCity);
