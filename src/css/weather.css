@@ -456,6 +456,52 @@
   flex-wrap: wrap;
 }
 
+/* Стрелки */
+.forecast-scroll-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: rgba(16, 33, 54, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  font-size: 24px;
+}
+.forecast-scroll-arrow.left {
+  left: 8px;
+}
+.forecast-scroll-arrow.right {
+  right: 8px;
+}
+
+/* Только для мобильных — переопределяем нужное */
+@media (max-width: 767px) {
+  .five-day-forecast-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    gap: 10px;
+    scroll-behavior: smooth;
+    /* Остальные свойства останутся из основного блока */
+  }
+  .five-day-forecast-container::-webkit-scrollbar {
+    display: none;
+  }
+  .five-day-forecast-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 .forecast-card {
   display: flex;
   flex-direction: column;
@@ -604,6 +650,17 @@
   }
   .five-day-header {
     gap: 24px;
+  }
+
+  .five-day-forecast-container {
+    overflow-x: visible;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    position: static;
+    padding-bottom: 0;
+  }
+  .forecast-scroll-arrow {
+    display: none;
   }
 }
 

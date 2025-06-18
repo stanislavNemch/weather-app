@@ -189,4 +189,28 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, 1000);
   }
+  // Горизонтальный скролл для 5-дневного прогноза на мобильных
+  const leftArrow = document.querySelector('.forecast-scroll-arrow.left');
+  const rightArrow = document.querySelector('.forecast-scroll-arrow.right');
+  const forecastContainer = document.querySelector(
+    '.five-day-forecast-container'
+  );
+
+  function scrollForecast(direction) {
+    if (!forecastContainer) return;
+    const card = forecastContainer.querySelector('.forecast-card');
+    if (!card) return;
+    const scrollAmount = card.offsetWidth + 10; // 10px — gap между карточками
+    forecastContainer.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    });
+  }
+
+  if (leftArrow) {
+    leftArrow.addEventListener('click', () => scrollForecast('left'));
+  }
+  if (rightArrow) {
+    rightArrow.addEventListener('click', () => scrollForecast('right'));
+  }
 });
