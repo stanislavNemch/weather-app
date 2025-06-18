@@ -398,6 +398,110 @@
   z-index: -1;
 }
 
+/* UPDATED STYLES FOR FORECAST VIEW */
+
+.weather-app.five-day-layout-active {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Вирівнюємо все по верху, щоб flex-grow спрацював */
+}
+
+#five-day-view-container {
+  display: block; /* Изменено для корректной работы дочерних элементов */
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Вирівнюємо вміст по нижньому краю */
+  padding-bottom: 50px; /* Додаємо відступ знизу для краси */
+  box-sizing: border-box; /* Важливо для коректного розрахунку висоти */
+}
+
+.five-day-header {
+  position: relative; /* Встановлюємо відносне позиціонування для батьківського блоку */
+  display: flex;
+  justify-content: center; /* Притискаємо вкладки до правого краю */
+  align-items: center;
+  flex-direction: column-reverse;
+  gap: 16px;
+  width: 100%;
+  margin: 32px auto 32px;
+  padding: 0 15px;
+}
+
+#forecast-header-city {
+  color: var(--text-light);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* Для вида "Сегодня" отступ снизу для вкладок */
+#today-view-container .forecast-tabs {
+  margin-bottom: 32px;
+}
+
+.five-day-forecast-container {
+  border-radius: 34px;
+  box-shadow: 0 8px 43px 0 rgba(16, 33, 54, 0.6);
+  background: rgba(16, 33, 54, 0.8);
+  width: 100%;
+  max-width: 1248px;
+  min-height: 307px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 10px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.forecast-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  color: var(--text-light);
+  width: 120px;
+}
+.forecast-card .forecast-day-of-week {
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: capitalize;
+}
+.forecast-card .forecast-date {
+  font-weight: 400;
+  font-size: 16px;
+  color: #767d85;
+}
+.forecast-card .forecast-icon img {
+  width: 56px;
+  height: 56px;
+}
+.forecast-min-max {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.forecast-min-max .temp-value {
+  font-weight: 700;
+  font-size: 20px;
+}
+.forecast-min-max .label {
+  font-size: 16px;
+  color: #767d85;
+  margin-bottom: 4px;
+}
+.forecast-card .forecast-more-info {
+  font-weight: 400;
+  font-size: 14px;
+  text-decoration: underline;
+  color: #767d85;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
 /* Tablet styles */
 @media screen and (min-width: 768px) {
   .date-time-info {
@@ -498,6 +602,9 @@
     top: -2%;
     left: 85%;
   }
+  .five-day-header {
+    gap: 24px;
+  }
 }
 
 /* Desktop styles */
@@ -591,124 +698,10 @@
     top: -160px;
     left: 83%;
   }
-}
 
-/* UPDATED STYLES FOR FORECAST VIEW */
-
-.weather-app.five-day-layout-active {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Вирівнюємо все по верху, щоб flex-grow спрацював */
-}
-
-#five-day-view-container {
-  display: block; /* Изменено для корректной работы дочерних элементов */
-  width: 100%;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end; /* Вирівнюємо вміст по нижньому краю */
-  padding-bottom: 50px; /* Додаємо відступ знизу для краси */
-  box-sizing: border-box; /* Важливо для коректного розрахунку висоти */
-}
-
-.five-day-header {
-  position: relative; /* Встановлюємо відносне позиціонування для батьківського блоку */
-  display: flex;
-  justify-content: flex-end; /* Притискаємо вкладки до правого краю */
-  align-items: center;
-  width: 100%;
-  max-width: 1248px;
-  margin: 32px auto 32px;
-  padding: 0 15px;
-}
-
-#forecast-header-city {
-  position: absolute; /* Абсолютне позиціонування відносно .five-day-header */
-  left: 50%; /* Зміщуємо на 50% вліво від краю батьківського елемента */
-  transform: translateX(
-    -50%
-  ); /* Центруємо точно по горизонталі, зміщуючи на половину своєї ширини */
-  color: var(--text-light);
-  font-size: 32px;
-  font-weight: 700;
-  /* Додамо властивості, щоб текст не накладався на кнопки */
-  padding: 0 150px; /* Залишаємо місце з боків */
-  white-space: nowrap; /* Забороняємо перенос рядка */
-}
-
-/* Для вида "Сегодня" отступ снизу для вкладок */
-#today-view-container .forecast-tabs {
-  margin-bottom: 32px;
-}
-
-.five-day-forecast-container {
-  border-radius: 34px;
-  box-shadow: 0 8px 43px 0 rgba(16, 33, 54, 0.6);
-  background: rgba(16, 33, 54, 0.8);
-  width: 100%;
-  max-width: 1248px;
-  min-height: 307px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px 10px;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.forecast-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  text-align: center;
-  color: var(--text-light);
-  width: 120px;
-}
-.forecast-card .forecast-day-of-week {
-  font-weight: 700;
-  font-size: 18px;
-  text-transform: capitalize;
-}
-.forecast-card .forecast-date {
-  font-weight: 400;
-  font-size: 16px;
-  color: #767d85;
-}
-.forecast-card .forecast-icon img {
-  width: 56px;
-  height: 56px;
-}
-.forecast-min-max {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.forecast-min-max .temp-value {
-  font-weight: 700;
-  font-size: 20px;
-}
-.forecast-min-max .label {
-  font-size: 16px;
-  color: #767d85;
-  margin-bottom: 4px;
-}
-.forecast-card .forecast-more-info {
-  font-weight: 400;
-  font-size: 14px;
-  text-decoration: underline;
-  color: #767d85;
-  cursor: pointer;
-  margin-top: 8px;
-}
-
-/* Адаптация для мобильных устройств */
-@media screen and (max-width: 767px) {
   .five-day-header {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 138px;
   }
 }
