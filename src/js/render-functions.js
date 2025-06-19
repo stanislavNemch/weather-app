@@ -220,10 +220,11 @@ export function renderFiveDayForecast(forecastData) {
 
   const dailyData = processForecastData(forecastData);
   const aggregatedData = aggregateDailyData(dailyData);
+  const dateKeys = Object.keys(dailyData).slice(0, 5);
 
   container.innerHTML = '';
 
-  aggregatedData.forEach(day => {
+  aggregatedData.forEach((day, index) => {
     const dayOfWeek = day.date.toLocaleDateString('en-US', { weekday: 'long' });
     const dayOfMonth = day.date.toLocaleDateString('en-US', {
       day: 'numeric',
@@ -256,6 +257,86 @@ export function renderFiveDayForecast(forecastData) {
       </div>
       <a class="forecast-more-info">more info</a>
     `;
+
+    const moreInfoLink = card.querySelector('.forecast-more-info');
+    const dateKey = dateKeys[index];
+    if (moreInfoLink && dailyData[dateKey]) {
+      moreInfoLink.dataset.dayData = JSON.stringify(dailyData[dateKey]);
+      const fullDateString = day.date.toLocaleDateString('en-US', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'short',
+      });
+      moreInfoLink.dataset.dateString = fullDateString;
+    }
+
     container.appendChild(card);
   });
+}
+
+/**
+ * Рендерит подробный почасовой прогноз для выбранного дня.
+ * @param {Array} dayData - Массив объектов с 3-часовым прогнозом.
+ * @param {string} dateString - Отформатированная строка даты для заголовка.
+ */
+export function renderHourlyForecast(dayData, dateString) {
+  const container = document.getElementById('hourly-forecast-container');
+  if (!container) return;
+
+  const hPaToMmHg = hPa => Math.round(hPa * 0.750062);
+
+  const cardsHTML = dayData
+    .map(item => {
+      const time = new Date(item.dt * 1000).toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      });
+      const icon = getWeatherIconImg(item.weather[0].icon);
+      const temp = `${Math.round(item.main.temp)}°`;
+      const pressure = hPaToMmHg(item.main.pressure);
+      const humidity = item.main.humidity;
+      const wind = item.wind.speed.toFixed(1);
+
+      return `
+        <div class="hourly-card">
+          <p class="hourly-time">${time}</p>
+          <div class="hourly-icon">${icon}</div>
+          <p class="hourly-temp">${temp}</p>
+          <div class="hourly-details">
+            <div class="hourly-details-item">
+              <svg><use href="${iconsSvg}#barometer"></use></svg> 
+              <span>${pressure} mm</span>
+            </div>
+            <div class="hourly-details-item">
+              <svg><use href="${iconsSvg}#humidity"></use></svg>
+              <span>${humidity}%</span>
+            </div>
+            <div class="hourly-details-item">
+              <svg><use href="${iconsSvg}#wind"></use></svg>
+              <span>${wind} m/s</span>
+            </div>
+          </div>
+        </div>
+      `;
+    })
+    .join('');
+
+  container.innerHTML = `
+    <h3 class="hourly-forecast-header">${dateString}</h3>
+    <div class="hourly-forecast-cards-wrapper">${cardsHTML}</div>
+  `;
+
+  container.style.display = 'block';
+}
+
+/**
+ * Скрывает блок с почасовым прогнозом.
+ */
+export function hideHourlyForecast() {
+  const container = document.getElementById('hourly-forecast-container');
+  if (container) {
+    container.style.display = 'none';
+    container.innerHTML = '';
+  }
 }

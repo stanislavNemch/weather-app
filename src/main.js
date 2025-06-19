@@ -6,6 +6,8 @@ import {
   updateQuoteDisplay,
   renderFiveDayForecast,
   updateBackground,
+  renderHourlyForecast,
+  hideHourlyForecast,
 } from './js/render-functions.js';
 
 // DOM-элементы
@@ -72,6 +74,7 @@ function showTodayView() {
   fiveDayViewContainer.style.display = 'none';
   todayViewContainer.style.display = 'block';
 
+  hideHourlyForecast(); // Сховуємо годинний прогноз, якщо він був відкритий
   fetchAndDisplayWeather(currentCity);
 }
 
@@ -97,6 +100,7 @@ function handleCityClick(city) {
   currentCity = city;
   updateBackground(city);
   updateQuoteDisplay();
+  hideHourlyForecast();
 
   if (fiveDaysTabTodayView.classList.contains('active')) {
     fetchAndDisplayFiveDayForecast(city);
@@ -212,6 +216,43 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (rightArrow) {
     rightArrow.addEventListener('click', () => scrollForecast('right'));
+  }
+
+  const fiveDayContainer = document.querySelector(
+    '.five-day-forecast-container'
+  );
+  let lastActiveMoreInfo = null;
+
+  if (fiveDayContainer) {
+    fiveDayContainer.addEventListener('click', e => {
+      const moreInfoLink = e.target.closest('.forecast-more-info');
+
+      if (!moreInfoLink) {
+        return;
+      }
+      e.preventDefault();
+
+      if (lastActiveMoreInfo === moreInfoLink) {
+        hideHourlyForecast();
+        moreInfoLink.classList.remove('active');
+        lastActiveMoreInfo = null;
+        return;
+      }
+
+      if (lastActiveMoreInfo) {
+        lastActiveMoreInfo.classList.remove('active');
+      }
+
+      moreInfoLink.classList.add('active');
+      lastActiveMoreInfo = moreInfoLink;
+
+      const dayData = JSON.parse(moreInfoLink.dataset.dayData);
+      const dateString = moreInfoLink.dataset.dateString;
+
+      if (dayData && dayData.length > 0) {
+        renderHourlyForecast(dayData, dateString);
+      }
+    });
   }
 });
 
