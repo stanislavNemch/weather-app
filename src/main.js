@@ -86,10 +86,8 @@ function showFiveDayView() {
 
   todayViewContainer.style.display = 'none';
 
-  // ======================= ВИПРАВЛЕННЯ ТУТ =======================
   // Встановлюємо 'flex' замість 'block', щоб активувати верстку з CSS
   fiveDayViewContainer.style.display = 'flex';
-  // ===============================================================
 
   fetchAndDisplayFiveDayForecast(currentCity);
 }
