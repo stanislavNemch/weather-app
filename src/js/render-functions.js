@@ -93,7 +93,7 @@ export function updateWeatherUI(data, cityName) {
   sunsetElement.innerHTML = `<svg width="24" height="24"><use href="${iconsSvg}#sunset"></use></svg>${sunsetTime}`;
 
   //updateBackground(cityName);
-  updateQuoteDisplay();
+  //updateQuoteDisplay();
 }
 
 export async function updateBackground(query) {

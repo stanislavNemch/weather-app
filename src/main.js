@@ -96,6 +96,7 @@ function showFiveDayView() {
 function handleCityClick(city) {
   currentCity = city;
   updateBackground(city);
+  updateQuoteDisplay();
 
   if (fiveDaysTabTodayView.classList.contains('active')) {
     fetchAndDisplayFiveDayForecast(city);
@@ -125,6 +126,7 @@ function addCity() {
         renderCityTags(cities, handleCityClick, handleCityRemove);
         cityInput.value = '';
         currentCity = newCity;
+        updateQuoteDisplay();
         showTodayView();
       }
     })

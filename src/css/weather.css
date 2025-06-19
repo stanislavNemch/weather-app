@@ -359,6 +359,7 @@
   max-width: 395px;
   font-style: italic;
   color: var(--text-light);
+  margin-bottom: 32px;
 }
 
 #quote-text {
@@ -659,6 +660,7 @@
     position: absolute;
     right: 0;
     margin-right: 32px;
+    bottom: 0;
   }
 
   #quote-text {
@@ -773,6 +775,7 @@
 
   .quote {
     bottom: 50px;
+    margin-bottom: 0;
   }
 
   .romb-left {
