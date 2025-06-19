@@ -266,7 +266,6 @@
   font-weight: 300;
   font-size: 45px;
   letter-spacing: 0.04em;
-  text-align: center;
   position: absolute;
   top: 25px;
   left: 61px;
@@ -469,18 +468,22 @@
   top: 90%;
   transform: translateY(-50%);
   z-index: 2;
-  background: rgba(16, 33, 54, 0.7);
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
   cursor: pointer;
-  font-size: 24px;
 }
+
+.forecast-scroll-arrow svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.5px;
+  stroke: #fff;
+}
+.forecast-scroll-arrow:hover svg {
+  stroke: #ff6b09; /* Цвет стрелки при наведении */
+}
+
 .forecast-scroll-arrow.left {
   left: 100px;
 }
