@@ -246,7 +246,7 @@ export function renderFiveDayForecast(forecastData) {
         </div>
         <span class="minmax-divider">
                 <svg width="1" height="40">
-                  <use href="/img/icons.svg#vertical-line"></use>
+                  <use href="${iconsSvg}#vertical-line"></use>
                 </svg>
         </span>
         <div>
