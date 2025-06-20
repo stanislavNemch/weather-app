@@ -279,7 +279,7 @@ export function renderFiveDayForecast(forecastData) {
  * @param {Array} dayData - Массив объектов с 3-часовым прогнозом.
  * @param {string} dateString - Отформатированная строка даты для заголовка.
  */
-export function renderHourlyForecast(dayData, dateString) {
+export function renderHourlyForecast(dayData) {
   const container = document.getElementById('hourly-forecast-container');
   if (!container) return;
 
@@ -323,7 +323,6 @@ export function renderHourlyForecast(dayData, dateString) {
     .join('');
 
   container.innerHTML = `
-    <h3 class="hourly-forecast-header">${dateString}</h3>
     <div class="hourly-forecast-cards-wrapper">${cardsHTML}</div>
   `;
 
