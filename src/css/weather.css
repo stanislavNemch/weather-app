@@ -498,7 +498,6 @@
 .custom-scrollbar {
   width: 248px;
   margin: 8px auto 0 auto;
-  height: 4px;
   position: relative;
   user-select: none;
 }

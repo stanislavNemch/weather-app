@@ -322,10 +322,25 @@ export function renderHourlyForecast(dayData) {
     })
     .join('');
 
+  // Проверяем, есть ли уже custom-scrollbar
+  let scrollbar = container.querySelector('.custom-scrollbar');
+  if (!scrollbar) {
+    scrollbar = document.createElement('div');
+    scrollbar.className = 'custom-scrollbar';
+    scrollbar.id = 'hourly-custom-scrollbar';
+    scrollbar.style.display = 'none';
+    scrollbar.innerHTML = `
+      <svg width="248" height="4">
+        <line x1="0" y1="2" x2="248" y2="2" stroke="rgba(255,255,255,0.2)" stroke-width="2" />
+        <line id="hourly-scrollbar-thumb" x1="0" y1="2" x2="60" y2="2" stroke="#ff6b09" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    `;
+  }
+
   container.innerHTML = `
     <div class="hourly-forecast-cards-wrapper">${cardsHTML}</div>
   `;
-
+  container.appendChild(scrollbar);
   container.style.display = 'block';
 }
 
