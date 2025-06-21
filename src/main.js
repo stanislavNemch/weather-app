@@ -251,9 +251,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (dayData && dayData.length > 0) {
         renderHourlyForecast(dayData, dateString);
+        if (window.attachHourlyScrollbarEvents)
+          window.attachHourlyScrollbarEvents();
       }
     });
   }
+
+  // --- Кастомная полоса прокрутки для hourly-forecast-container ---
+  const hourlyContainer = document.getElementById('hourly-forecast-container');
+  const customScrollbar = document.getElementById('hourly-custom-scrollbar');
+  const thumb = document.getElementById('hourly-scrollbar-thumb');
+  const scrollbarWidth = 248; // px
+
+  function updateHourlyScrollbar() {
+    if (!hourlyContainer || !customScrollbar || !thumb) return;
+    const wrapper = hourlyContainer.querySelector(
+      '.hourly-forecast-cards-wrapper'
+    );
+    if (!wrapper) return;
+
+    // Показываем/скрываем кастомную полосу только если есть горизонтальный скролл
+    if (wrapper.scrollWidth > wrapper.clientWidth) {
+      customScrollbar.style.display = 'block';
+    } else {
+      customScrollbar.style.display = 'none';
+      return;
+    }
+
+    const scrollWidth = wrapper.scrollWidth;
+    const clientWidth = wrapper.clientWidth;
+    const scrollLeft = wrapper.scrollLeft;
+
+    const thumbWidth = Math.max(
+      (clientWidth / scrollWidth) * scrollbarWidth,
+      32
+    ); // min 32px
+    const maxScroll = scrollWidth - clientWidth;
+    const maxThumbMove = scrollbarWidth - thumbWidth;
+    const thumbX = maxScroll > 0 ? (scrollLeft / maxScroll) * maxThumbMove : 0;
+
+    thumb.setAttribute('x1', thumbX);
+    thumb.setAttribute('x2', thumbX + thumbWidth);
+  }
+
+  function attachHourlyScrollbarEvents() {
+    if (!hourlyContainer) return;
+    const wrapper = hourlyContainer.querySelector(
+      '.hourly-forecast-cards-wrapper'
+    );
+    if (!wrapper) return;
+    wrapper.addEventListener('scroll', updateHourlyScrollbar);
+    window.addEventListener('resize', updateHourlyScrollbar);
+    updateHourlyScrollbar();
+  }
+
+  // Если hourly-forecast-container появляется динамически, вызывайте attachHourlyScrollbarEvents()
+  // после рендера часового прогноза:
+  window.attachHourlyScrollbarEvents = attachHourlyScrollbarEvents;
 });
 
 function moveForecastHeaderCity() {
