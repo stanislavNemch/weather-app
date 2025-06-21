@@ -9,7 +9,7 @@
   <script type="module" crossorigin src="/weather-app/index.js"></script>
   <link rel="modulepreload" crossorigin href="/weather-app/assets/vendor-Bk_fp7ln.js">
   <link rel="stylesheet" crossorigin href="/weather-app/assets/vendor-D_nxXpU-.css">
-  <link rel="stylesheet" crossorigin href="/weather-app/assets/index-fXrzmdMA.css">
+  <link rel="stylesheet" crossorigin href="/weather-app/assets/index-DbxN-HI6.css">
 </head>
 
 <body>
@@ -136,6 +136,13 @@
           </button>
         </div>
         <div id="hourly-forecast-container" style="display: none;">
+        </div>
+        <div class="custom-scrollbar" id="hourly-custom-scrollbar" style="display:none;">
+          <svg width="248" height="4">
+            <line x1="0" y1="2" x2="248" y2="2" stroke="rgba(255,255,255,0.2)" stroke-width="2" />
+            <line id="hourly-scrollbar-thumb" x1="0" y1="2" x2="60" y2="2" stroke="#ff6b09" stroke-width="2"
+              stroke-linecap="round" />
+          </svg>
         </div>
       </div>
     </div>
