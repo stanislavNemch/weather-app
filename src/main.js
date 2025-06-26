@@ -61,7 +61,7 @@ function setupCustomScrollbar(config) {
   if (scrollbarElement.dataset.customScrollbarInitialized === 'true') {
     // console.log('Scrollbar already initialized for:', scrollbarId);
     // Ensure visuals are up-to-date if called again (e.g. after content change)
-    updateThumbVisuals();
+    setTimeout(updateThumbVisuals, 0);
     return;
   }
   scrollbarElement.dataset.customScrollbarInitialized = 'true';
@@ -89,7 +89,9 @@ function setupCustomScrollbar(config) {
 
     let thumbX = 0;
     if (scrollWidth - clientWidth > 0) {
-      thumbX = (wrapperElement.scrollLeft / (scrollWidth - clientWidth)) * maxThumbMove;
+      thumbX =
+        (wrapperElement.scrollLeft / (scrollWidth - clientWidth)) *
+        maxThumbMove;
     }
 
     // Ensure thumbX is within bounds
@@ -109,7 +111,10 @@ function setupCustomScrollbar(config) {
     const currentThumbWidth =
       (parseFloat(thumbElement.getAttribute('x2')) || 0) - currentThumbX1;
 
-    if (clickX >= currentThumbX1 && clickX <= currentThumbX1 + currentThumbWidth) {
+    if (
+      clickX >= currentThumbX1 &&
+      clickX <= currentThumbX1 + currentThumbWidth
+    ) {
       // Clicked on the thumb itself
       isDragging = true;
       dragStartX = clickX - currentThumbX1; // Position of click relative to thumb's start
@@ -121,7 +126,8 @@ function setupCustomScrollbar(config) {
       if (scrollWidth <= clientWidth) return; // No scroll needed
 
       const minThumbWidth = 32;
-      const calculatedThumbWidth = (clientWidth / scrollWidth) * scrollbarVisibleWidth;
+      const calculatedThumbWidth =
+        (clientWidth / scrollWidth) * scrollbarVisibleWidth;
       const thumbWidth = Math.max(calculatedThumbWidth, minThumbWidth);
       const maxThumbMove = scrollbarVisibleWidth - thumbWidth;
 
@@ -146,7 +152,8 @@ function setupCustomScrollbar(config) {
     if (scrollWidth <= clientWidth) return;
 
     const minThumbWidth = 32;
-    const calculatedThumbWidth = (clientWidth / scrollWidth) * scrollbarVisibleWidth;
+    const calculatedThumbWidth =
+      (clientWidth / scrollWidth) * scrollbarVisibleWidth;
     const thumbWidth = Math.max(calculatedThumbWidth, minThumbWidth);
     const maxThumbMove = scrollbarVisibleWidth - thumbWidth;
 
@@ -176,7 +183,6 @@ function setupCustomScrollbar(config) {
   // Use setTimeout to ensure layout is stable, especially if content is dynamic
   setTimeout(updateThumbVisuals, 0);
 }
-
 
 function showLoader() {
   loaderElement.classList.remove('hidden');
@@ -256,11 +262,11 @@ function showChart() {
   if (window.innerWidth <= 767) {
     // Replaced attachChartScrollbarEvents with setupCustomScrollbar
     setupCustomScrollbar({
-        wrapperSelector: '#chart-wrapper',
-        scrollbarId: 'chart-custom-scrollbar',
-        thumbId: 'chart-scrollbar-thumb',
-        scrollbarVisibleWidth: 250,
-      });
+      wrapperSelector: '#chart-wrapper',
+      scrollbarId: 'chart-custom-scrollbar',
+      thumbId: 'chart-scrollbar-thumb',
+      scrollbarVisibleWidth: 250,
+    });
   }
 }
 
@@ -292,6 +298,10 @@ function addCity() {
     showNotification('Це місто вже додано.', 'warning');
     return;
   }
+  if (cities.length >= 5) {
+    cities.shift();
+  }
+
   showLoader();
   getWeatherData(newCity)
     .then(data => {
@@ -432,13 +442,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const dayData = JSON.parse(moreInfoLink.dataset.dayData);
       renderHourlyForecast(dayData, moreInfoLink.dataset.dateString);
       // Replaced attachHourlyScrollbarEvents with setupCustomScrollbar
-      setupCustomScrollbar({
-        wrapperSelector:
-          '#hourly-forecast-container .hourly-forecast-cards-wrapper',
-        scrollbarId: 'hourly-custom-scrollbar',
-        thumbId: 'hourly-scrollbar-thumb',
-        scrollbarVisibleWidth: 248,
-      });
+      setTimeout(() => {
+        setupCustomScrollbar({
+          wrapperSelector:
+            '#hourly-forecast-container .hourly-forecast-cards-wrapper',
+          scrollbarId: 'hourly-custom-scrollbar',
+          thumbId: 'hourly-scrollbar-thumb',
+          scrollbarVisibleWidth: 248,
+        });
+      }, 0);
     });
   }
 
@@ -453,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showChart();
       // оновлюємо селектор для інтерактивного скролу
       // Replaced enableInteractiveScrollbar with setupCustomScrollbar
-       setupCustomScrollbar({
+      setupCustomScrollbar({
         wrapperSelector: '#chart-wrapper',
         scrollbarId: 'chart-custom-scrollbar',
         thumbId: 'chart-scrollbar-thumb',

@@ -1045,6 +1045,7 @@
     max-width: 822px;
     margin: 0 auto; /* Центрируем внутри weather-app */
     align-items: center;
+    margin-bottom: 106px; /* Отступ снизу для мобильной версии */
   }
 
   .city-tags {

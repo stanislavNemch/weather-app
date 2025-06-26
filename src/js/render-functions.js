@@ -432,7 +432,12 @@ export function renderWeatherChart(forecastData) {
  */
 export function renderHourlyForecast(dayData) {
   const container = document.getElementById('hourly-forecast-container');
-  if (!container) return;
+  // Находим заранее созданный контейнер для карточек
+  const wrapper = container.querySelector('.hourly-forecast-cards-wrapper');
+  if (!container || !wrapper) {
+    //console.error('Hourly forecast wrapper not found!');
+    return;
+  }
 
   const hPaToMmHg = hPa => Math.round(hPa * 0.750062);
 
@@ -473,27 +478,14 @@ export function renderHourlyForecast(dayData) {
     })
     .join('');
 
-  // Проверяем, есть ли уже custom-scrollbar
-  let scrollbar = container.querySelector('.custom-scrollbar');
-  if (!scrollbar) {
-    scrollbar = document.createElement('div');
-    scrollbar.className = 'custom-scrollbar hidden';
-    scrollbar.id = 'hourly-custom-scrollbar';
-    // scrollbar.style.display = 'none'; // Now handled by .hidden class
-    scrollbar.innerHTML = `
-      <svg width="248" height="4">
-        <line x1="0" y1="2" x2="248" y2="2" stroke="rgba(255,255,255,0.2)" stroke-width="2" />
-        <line id="hourly-scrollbar-thumb" x1="0" y1="2" x2="60" y2="2" stroke="#ff6b09" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    `;
-  }
+  // Обновляем ТОЛЬКО HTML-содержимое обертки, не трогая скроллбар
+  wrapper.innerHTML = cardsHTML;
 
-  container.innerHTML = `
-    <div class="hourly-forecast-cards-wrapper">${cardsHTML}</div>
-  `;
-  container.appendChild(scrollbar);
-  container.classList.remove('hidden'); // Assuming block is handled by CSS or default
-  // Scrollbar setup is now handled in main.js after this function is called
+  // При обновлении данных сбрасываем прокрутку в начало
+  wrapper.scrollLeft = 0;
+
+  // Показываем родительский контейнер, если он был скрыт
+  container.classList.remove('hidden');
 }
 
 /**
