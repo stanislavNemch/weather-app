@@ -5,6 +5,7 @@
   justify-content: center;
   width: 100%;
   max-width: 320px; /* Ограничиваем ширину для мобильных */
+  margin-bottom: 40px;
 }
 
 .search-bar {
@@ -874,10 +875,6 @@
 
 /* Tablet styles */
 @media screen and (min-width: 768px) {
-  #five-day-view-container {
-    min-height: 75vh; /* Задаємо висоту для планшетів */
-  }
-
   #hourly-forecast-container {
     margin: 0 auto;
   }
@@ -917,6 +914,7 @@
 
   .header-search {
     max-width: 731px;
+    margin-bottom: 106px;
   }
 
   .search-bar {
