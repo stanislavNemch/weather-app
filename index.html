@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link href="/weather-app/assets/favicon-DUzivux-.ico" rel="icon" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
+  <script type="module" crossorigin src="/weather-app/assets/js/index-BQmsq5C-.js"></script>
+  <link rel="modulepreload" crossorigin href="/weather-app/assets/js/vendor-common-nuPr2OCY.js">
+  <link rel="stylesheet" crossorigin href="/weather-app/assets/vendor-common-rYymzvtj.css">
+  <link rel="stylesheet" crossorigin href="/weather-app/assets/index-DaPeGoDK.css">
+</head>
+
+<body>
+
+  <div class="weather-app">
+    <div class="header-search">
+      <div class="search-bar">
+        <svg class="lucide lucide-location" width="22" height="22" aria-hidden="true">
+          <use href="/weather-app/assets/icons-B5UIjEs_.svg#location"></use>
+        </svg>
+        <label for="city-input" class="visually-hidden">Enter city name</label>
+        <input type="text" id="city-input" placeholder="Enter the city">
+        <button id="add-city-button" aria-label="Add city to favorites">
+          <svg class="lucide lucide-star" width="22" height="20" aria-hidden="true">
+            <use href="/weather-app/assets/icons-B5UIjEs_.svg#star"></use>
+          </svg>
+        </button>
+      </div>
+      <div class="city-tags" id="city-tags-container">
+        <button class="city-tags-toggle hidden" id="city-tags-toggle" aria-label="Показать все города">
+          <svg class="arrow-left" width="28" height="28" aria-hidden="true">
+            <use href="/weather-app/assets/icons-B5UIjEs_.svg#arrow-left"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="today-view-container">
+      <div class="weather-display">
+        <div class="current-weather">
+          <div class="weather-icon"></div>
+          <div class="location">Kyiv, UA</div>
+          <div class="temperature-and-minmax">
+            <div class="temperature">-3°</div>
+            <div class="min-max">
+              <div class="min-col">
+                <span class="min-label">min</span>
+                <span class="min-temp">-2°</span>
+              </div>
+              <span class="minmax-divider" aria-hidden="true">
+                <svg width="1" height="40">
+                  <use href="/weather-app/assets/icons-B5UIjEs_.svg#vertical-line"></use>
+                </svg>
+              </span>
+              <div class="max-col">
+                <span class="max-label">max</span>
+                <span class="max-temp">1°</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="forecast-tabs">
+          <button class="tab-button active" id="today-tab-today-view">
+            Сьогодні
+          </button>
+          <button class="tab-button" id="5-days-tab-today-view">5 днів</button>
+        </div>
+      </div>
+      <div class="weather-info-section">
+        <div class="date-time-info">
+          <div class="date">
+            <span class="date-number">8<sup>th</sup></span>
+            <span class="day-of-week">Sat</span>
+          </div>
+          <div class="month-time-container">
+            <div class="month">February</div>
+            <span class="month-day-divider" aria-hidden="true">
+              <svg width="1" height="22">
+                <use href="/weather-app/assets/icons-B5UIjEs_.svg#vertical-line"></use>
+              </svg>
+            </span>
+            <div class="time">21:30:56</div>
+          </div>
+          <div class="sun-times">
+            <span class="sunrise">
+              <svg width="24" height="24" aria-hidden="true">
+                <use href="/weather-app/assets/icons-B5UIjEs_.svg#sunrise"></use>
+              </svg>
+              07:04
+            </span>
+            <span class="sun-time-divider" aria-hidden="true">
+              <svg width="1" height="22">
+                <use href="/weather-app/assets/icons-B5UIjEs_.svg#vertical-line"></use>
+              </svg>
+            </span>
+            <span class="sunset">
+              <svg width="24" height="24" aria-hidden="true">
+                <use href="/weather-app/assets/icons-B5UIjEs_.svg#sunset"></use>
+              </svg>
+              17:05
+            </span>
+          </div>
+        </div>
+        <div class="quote">
+          <p id="quote-text"></p>
+          <p id="quote-author" class="author"></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="five-day-view-container" class="hidden">
+      <div class="five-day-header">
+        <h2 id="forecast-header-city"></h2>
+        <div class="forecast-tabs">
+          <button class="tab-button" id="today-tab-five-day-view">
+            Сьогодні
+          </button>
+          <button class="tab-button active" id="5-days-tab-five-day-view">
+            5 днів
+          </button>
+        </div>
+      </div>
+      <div class="forecast-main-section" id="forecast-main-section">
+        <div class="five-day-forecast-wrapper" style="position:relative;">
+          <button class="forecast-scroll-arrow left" aria-label="Scroll forecast left">
+            <svg width="24" height="24" aria-hidden="true">
+              <use href="/weather-app/assets/icons-B5UIjEs_.svg#arrow-left"></use>
+            </svg>
+          </button>
+          <div class="five-day-forecast-container">
+            <!-- forecast-card ... -->
+          </div>
+          <button class="forecast-scroll-arrow right" aria-label="Scroll forecast right">
+            <svg width="24" height="24" aria-hidden="true">
+              <use href="/weather-app/assets/icons-B5UIjEs_.svg#arrow-right"></use>
+            </svg>
+          </button>
+        </div>
+        <div id="hourly-forecast-container" class="hidden">
+          <div class="custom-scrollbar hidden" id="hourly-custom-scrollbar">
+            <svg width="248" height="4">
+              <line x1="0" y1="2" x2="248" y2="2" stroke="rgba(255,255,255,0.2)" stroke-width="2" />
+              <line id="hourly-scrollbar-thumb" x1="0" y1="2" x2="60" y2="2" stroke="#ff6b09" stroke-width="2"
+                stroke-linecap="round" />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="five-day-show-chart" id="show-chart-container">
+        <a href="#" class="show-chart-link" id="show-chart-link">
+          Show Chart
+          <svg class="show-chart-icon" width="24" height="24" aria-hidden="true">
+            <use href="/weather-app/assets/icons-B5UIjEs_.svg#arrow-down"></use>
+          </svg>
+        </a>
+      </div>
+
+      <div class="chart-section hidden" id="chart-section">
+        <div class="chart-header">
+          <a href="#" class="hide-chart-link" id="hide-chart-link">
+            Hide Chart
+            <svg class="hide-chart-icon" width="24" height="24" aria-hidden="true">
+              <use href="/weather-app/assets/icons-B5UIjEs_.svg#arrow-down"></use>
+            </svg>
+          </a>
+        </div>
+        <div class="chart-legend-wrapper">
+          <p>AVERAGE:</p>
+          <div class="chart-legend" id="chart-legend">
+            <label class="chart-legend-item">
+              <input type="checkbox" name="chart-data" value="temp" checked>
+              <span class="legend-color-box temp"></span>
+              <span>— Temperature, <span class="unit unit-temp">C°</span></span>
+            </label>
+            <label class="chart-legend-item">
+              <input type="checkbox" name="chart-data" value="humidity">
+              <span class="legend-color-box humidity"></span>
+              <span>— Humidity, <span class="unit unit-humidity">%</span></span>
+            </label>
+            <label class="chart-legend-item">
+              <input type="checkbox" name="chart-data" value="wind">
+              <span class="legend-color-box wind"></span>
+              <span>— Wind Speed, <span class="unit unit-wind">m/s</span></span>
+            </label>
+            <label class="chart-legend-item">
+              <input type="checkbox" name="chart-data" value="pressure">
+              <span class="legend-color-box pressure"></span>
+              <span>— Atmosphere Pressure, <span class="unit unit-pressure">m/m</span></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="chart-wrapper" id="chart-wrapper">
+          <div class="chart-canvas-container">
+            <canvas id="weather-chart"></canvas>
+          </div>
+        </div>
+        <div class="custom-scrollbar hidden" id="chart-custom-scrollbar">
+          <svg width="250" height="2">
+            <line class="scrollbar-track" x1="0" y1="1" x2="250" y2="1" stroke="rgba(255,255,255,0.2)"
+              stroke-width="2" />
+            <line class="scrollbar-thumb" id="chart-scrollbar-thumb" x1="0" y1="1" x2="60" y2="1" stroke="#ff6b09"
+              stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="romb romb-left"></div>
+    <div class="romb romb-right"></div>
+    <div id="loader" class="loader"></div>
+  </div>
+</body>
+
+</html>
