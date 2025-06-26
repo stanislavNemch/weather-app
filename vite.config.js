@@ -20,7 +20,7 @@ export default defineConfig(({ command }) => {
 
   return {
     root: resolve(__dirname, 'src'),
-    base: '/weather-app/',
+    base: './',
 
     // Плагины Vite
     plugins: [

@@ -431,7 +431,6 @@
 
 #five-day-view-container {
   width: 100%;
-  /* flex-grow: 1; */
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* Вирівнюємо вміст по нижньому краю */
@@ -875,7 +874,7 @@
 
 /* Tablet styles */
 @media screen and (min-width: 768px) {
-  .weather-app.five-day-layout-active {
+  #five-day-view-container {
     min-height: 75vh; /* Задаємо висоту для планшетів */
   }
 
@@ -1041,7 +1040,7 @@
 /* Desktop styles */
 @media screen and (min-width: 1280px) {
   .weather-app.five-day-layout-active {
-    min-height: 65vh; /* Задаємо висоту для планшетів */
+    min-height: 65vh;
   }
 
   .header-search {
