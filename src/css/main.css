@@ -1,0 +1,192 @@
+﻿/* Подключение шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+:root {
+  --font-family: 'Lato', sans-serif;
+  --primary-bg-color: #f1f2f7;
+  --dark-blue: #2c3e50; /* Темно-синий для карточек */
+  --text-light: #ffffff;
+  --text-dark: #333333;
+  --border-color: rgba(255, 255, 255, 0.15);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%; /* Важно для адаптивности изображений */
+  height: auto; /* Важно для адаптивности изображений */
+}
+
+a {
+  text-decoration: none;
+  color: inherit; /* Наследовать цвет текста */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+html,
+body {
+  min-width: 320px; /* или 280px, но не 0 */
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+body {
+  margin: 0 auto;
+  font-family: var(--font-family);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--primary-bg-color);
+  overflow: hidden; /* Предотвращаем прокрутку */
+  color: var(--text-dark);
+  position: relative;
+  --bg-image: none;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  filter: blur(16px) brightness(0.8);
+  transition: background-image 0.5s;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Класс для визуального скрытия элементов, доступных для скринридеров */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.weather-app {
+  min-width: 280px;
+  max-width: 360px;
+  width: 100%;
+  padding: 0 22px;
+  transition: background-image 0.5s ease-in-out;
+  background-color: var(--primary-bg-color); /* Фоновый цвет по умолчанию */
+  background-size: cover;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px) saturate(1.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 16px;
+  background-image: var(--bg-image); /* Оставляем фон */
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+/* Tablet styles */
+@media screen and (min-width: 768px) {
+  .weather-app {
+    max-width: 768px;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .weather-app {
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+  }
+}
+
+/* Стилі для лоадера (з https://github.com/vineethtrv/css-loader) */
+.loader {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  animation: rotate 1s linear infinite;
+  display: none;
+}
+.loader::before,
+.loader::after {
+  display: block;
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  animation: prixClipFix 2s linear infinite;
+}
+.loader::after {
+  border-color: #ff3d00;
+  animation: prixClipFix 2s linear infinite, rotate 0.5s linear infinite reverse;
+  inset: 6px;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes prixClipFix {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+  }
+  25% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+  }
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+  }
+  75% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+  }
+}

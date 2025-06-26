@@ -1,0 +1,1202 @@
+﻿/* Mobile-first */
+.header-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px; /* Ограничиваем ширину для мобильных */
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+  margin-bottom: 16px;
+  width: 100%;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.lucide-location {
+  width: 22px;
+  height: 22px;
+  margin-left: 20px;
+  margin-right: 16px;
+}
+
+.search-bar input {
+  flex-grow: 1;
+  padding: 0;
+  border: none;
+  outline: none;
+  max-width: 180px; /* Ограничиваем ширину поля ввода */
+  background: transparent;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: #000;
+}
+
+.search-bar button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  margin-right: 20px;
+}
+
+.city-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  max-height: 48px; /* высота для 1 строки */
+  position: relative;
+  transition: max-height 0.3s;
+  margin-bottom: 4px;
+}
+
+.city-tags.expanded {
+  flex-wrap: wrap;
+}
+
+.city-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(16, 33, 54, 0.5);
+  border-radius: 20px;
+  padding: 0px 12px;
+  height: 28px;
+  font-weight: 400;
+  font-size: 14px;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.city-tag .close-tag {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+}
+
+.city-tags-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 0 0 8px;
+  display: flex;
+  align-items: center;
+  height: 32px; /* подберите под размер ваших тегов */
+  margin-left: 4px;
+  position: static; /* уберите absolute */
+}
+
+.arrow-left {
+  width: 28px;
+  height: 28px;
+  background: rgba(16, 33, 54, 0.5);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.weather-display {
+  color: var(--text-light);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Убираем лишние отступы, если есть */
+.current-weather,
+.forecast-tabs,
+.date-time-info {
+  margin: 0;
+  padding: 0;
+}
+
+/* Отступ между current-weather и forecast-tabs */
+.current-weather {
+  width: 100%;
+  min-width: 280px;
+  padding: 32px 59px;
+  border-radius: 34px;
+  box-shadow: 0 5px 33px 0 rgba(16, 33, 54, 0.6);
+  background: #102136;
+  margin-bottom: 32px;
+
+  /* Изменения для мобильной версии */
+  display: flex;
+  flex-direction: column; /* Основное направление - колонка */
+  align-items: center; /* Центрируем по горизонтали */
+  justify-content: center;
+  position: relative; /* Для позиционирования weather-icon и location */
+  padding-top: 80px; /* Увеличим отступ сверху, чтобы разместить иконку и город */
+}
+
+.current-weather .weather-icon {
+  position: absolute;
+  top: 10px; /* Размещаем сверху */
+  left: 50%; /* По центру */
+  transform: translateX(-50%); /* Точная центровка */
+  margin-bottom: 0; /* Убираем лишний margin */
+}
+
+.current-weather .location {
+  position: absolute;
+  top: 55px; /* Размещаем под иконкой */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0; /* Убираем лишний margin */
+  font-size: 16px; /* Возможно, уменьшим размер шрифта для компактности */
+}
+
+.current-weather .temperature {
+  font-weight: 300;
+  font-size: 90px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin-right: 0; /* Уберем если есть */
+  margin-bottom: 0; /* Уберем если есть */
+}
+
+.temperature-and-minmax {
+  /* НОВЫЙ КОНТЕЙНЕР */
+  display: flex; /* Делаем flex-контейнером */
+  align-items: center; /* Выравниваем по центру по вертикали */
+  justify-content: center; /* Центрируем по горизонтали */
+  width: 100%;
+}
+
+.min-max {
+  display: flex;
+  flex-direction: row; /* Изменено на row, чтобы элементы были в одну строку */
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Уменьшаем зазор */
+  margin-left: 20px; /* Отступ от температуры */
+  padding-top: 0; /* Убираем отступ сверху */
+}
+
+.min-col,
+.max-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.min-label,
+.max-label {
+  font-weight: 400;
+  font-size: 18px;
+  text-align: center;
+  color: #767d85;
+  margin-bottom: 8px;
+}
+
+.min-temp,
+.max-temp {
+  font-weight: 400;
+  font-size: 18px;
+  text-align: center;
+}
+
+.minmax-divider {
+  display: flex; /* Изменено на flex, чтобы разделитель был виден */
+  align-items: center;
+  height: 40px;
+}
+
+.forecast-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 18px;
+}
+
+.tab-button {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #000;
+  border-radius: 20px;
+  padding: 0px 12px;
+  width: 126px;
+  height: 27px;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: background-color 0.3s ease;
+}
+
+.tab-button.active {
+  background-color: var(--text-light);
+  color: #000;
+}
+
+.date-time-info {
+  border-radius: 34px;
+  height: 184px;
+  background: rgba(16, 33, 54, 0.8);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 25px;
+  box-sizing: border-box;
+  position: relative;
+  margin-bottom: 44px;
+}
+
+.date {
+  font-weight: 300;
+  font-size: 45px;
+  letter-spacing: 0.04em;
+  position: absolute;
+  top: 25px;
+  left: 61px;
+  width: 194px; /* или нужная ширина */
+  margin-bottom: 10px;
+}
+
+.date-number {
+  position: relative;
+  display: inline-block;
+}
+
+.date sup {
+  position: absolute;
+  top: 0;
+  font-weight: 300;
+  font-size: 25px;
+  margin-left: 2px;
+}
+
+.day-of-week {
+  font-weight: 300;
+  font-size: 45px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin-left: 30px;
+}
+
+.month-time-container {
+  display: flex;
+  width: 100%;
+  justify-content: center; /* Распределяем элементы по горизонтали */
+  align-items: center;
+  position: absolute;
+  top: 90px; /* Позиция ниже даты */
+  left: 14.5px;
+  padding: 0 25px; /* Отступы как у даты */
+  box-sizing: border-box;
+}
+
+.month-day-divider {
+  margin: 0 10px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+}
+
+.month {
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+.time {
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+.sun-times {
+  display: flex;
+  align-items: stretch; /* растягиваем дочерние элементы по высоте */
+  justify-content: center;
+  width: 100%;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  position: absolute;
+  bottom: 25px;
+  padding: 0 25px;
+}
+
+.sunrise,
+.sunset {
+  display: flex;
+  align-items: center;
+  height: 24px; /* одинаковая высота */
+  padding: 0 8px;
+  gap: 8px; /* Увеличиваем зазор между иконкой и текстом */
+}
+
+/* New style for the divider between sunrise and sunset */
+.sun-time-divider {
+  display: flex;
+  align-items: center;
+  height: 24px; /* совпадает с .sunrise/.sunset */
+  padding: 0 4px;
+}
+
+/* Нові стилі для flexbox-розташування */
+#today-view-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Дозволяє контейнеру зайняти весь доступний простір по висоті */
+  width: 100%;
+}
+
+.quote {
+  max-width: 395px;
+  font-style: italic;
+  color: var(--text-light);
+  /* Нові стилі для розташування в правому нижньому куті */
+  margin-top: auto; /* Притискає блок до низу flex-контейнера */
+  align-self: flex-end; /* Вирівнює блок по правому краю */
+  /* Відступи для красивого розташування */
+  margin-bottom: 32px;
+}
+
+#quote-text {
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+.quote .author {
+  text-align: right;
+  font-weight: 400;
+  font-size: 18px;
+  margin-top: 8px;
+}
+
+.romb {
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  width: 112px;
+  height: 112px;
+  transform: rotate(60deg);
+}
+
+.romb-left {
+  position: absolute;
+  top: 0;
+  right: 90%;
+  z-index: -1;
+}
+
+.romb-right {
+  position: absolute;
+  top: 0;
+  left: 85%;
+  z-index: -1;
+}
+
+/* UPDATED STYLES FOR FORECAST VIEW */
+
+.forecast-main-section {
+  border-radius: 34px;
+  box-shadow: 0 8px 43px 0 rgba(16, 33, 54, 0.6);
+  background: rgba(16, 33, 54, 0.8);
+  width: 100%;
+  max-width: 1248px;
+  min-width: 280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-app.five-day-layout-active {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#five-day-view-container {
+  width: 100%;
+  /* flex-grow: 1; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Вирівнюємо вміст по нижньому краю */
+  box-sizing: border-box; /* Важливо для коректного розрахунку висоти */
+}
+
+.five-day-header {
+  position: relative; /* Встановлюємо відносне позиціонування для батьківського блоку */
+  display: flex;
+  justify-content: center; /* Притискаємо вкладки до правого краю */
+  align-items: center;
+  flex-direction: column-reverse;
+  gap: 16px;
+  width: 100%;
+  margin: 32px auto 32px;
+  padding: 0 15px;
+}
+
+#forecast-header-city {
+  color: var(--text-light);
+  font-size: 18px;
+  font-weight: 700;
+  position: absolute;
+  top: 32px; /* подберите нужное значение, чтобы заголовок был над карточками */
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Для вида "Сегодня" отступ снизу для вкладок */
+#today-view-container .forecast-tabs {
+  margin-bottom: 32px;
+}
+
+.five-day-forecast-container {
+  min-height: 307px;
+  padding: 20px;
+  box-sizing: border-box;
+  /* MOBILE-FIRST СТИЛІ ДЛЯ ГОРИЗОНТАЛЬНОГО СКРОЛУ */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 32px;
+  scroll-behavior: smooth;
+}
+.five-day-forecast-container::-webkit-scrollbar {
+  display: none;
+}
+.five-day-forecast-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Стрелки */
+.forecast-scroll-arrow {
+  position: absolute;
+  top: 90%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.forecast-scroll-arrow svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.5px;
+  stroke: #fff;
+}
+.forecast-scroll-arrow:hover svg {
+  stroke: #ff6b09; /* Цвет стрелки при наведении */
+}
+
+.forecast-scroll-arrow.left {
+  left: 100px;
+}
+.forecast-scroll-arrow.right {
+  right: 100px;
+}
+
+.custom-scrollbar {
+  width: 248px;
+  height: 2px;
+  margin: 0 auto;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.custom-scrollbar svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.forecast-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  color: var(--text-light);
+}
+.forecast-card .forecast-day-of-week {
+  font-weight: 400;
+  font-size: 12px;
+  opacity: 0.55;
+}
+.forecast-card .forecast-date {
+  font-weight: 400;
+  font-size: 16px;
+}
+.forecast-card .forecast-icon img {
+  width: 35px;
+  height: 35px;
+}
+.forecast-min-max {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.forecast-min-max .temp-value {
+  font-weight: 400;
+  font-size: 14px;
+  color: #ff6b09;
+}
+.forecast-min-max .label {
+  font-weight: 400;
+  font-size: 12px;
+  color: #767d85;
+}
+.forecast-card .forecast-more-info {
+  font-weight: 700;
+  font-size: 12px;
+  text-decoration: underline;
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+/* STYLES FOR HOURLY FORECAST (MORE INFO) */
+
+#hourly-forecast-container {
+  margin: 5px;
+  box-sizing: border-box;
+}
+
+.hourly-forecast-header {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-light);
+  text-align: left;
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+
+.hourly-forecast-cards-wrapper {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 30px;
+  scroll-behavior: smooth;
+  margin-bottom: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* Скрытие полосы прокрутки */
+.hourly-forecast-cards-wrapper::-webkit-scrollbar {
+  display: none;
+}
+.hourly-forecast-cards-wrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Скрытие полосы прокрутки */
+#hourly-forecast-container::-webkit-scrollbar {
+  display: none;
+}
+#hourly-forecast-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hourly-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  height: 217px;
+  gap: 8px;
+  text-align: center;
+  color: var(--text-light);
+  min-width: 120px;
+  padding: 16px;
+}
+
+.hourly-card .hourly-time {
+  font-weight: 400;
+  font-size: 14px;
+  opacity: 0.54;
+}
+
+.hourly-card .hourly-icon img {
+  width: 48px;
+  height: 48px;
+}
+
+.hourly-card .hourly-temp {
+  font-weight: 700;
+  font-size: 18px;
+  color: #ff6b09;
+}
+
+.hourly-card .hourly-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  opacity: 0.54;
+}
+
+.hourly-details-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hourly-details-item svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke-width: 0.1;
+  stroke: #aab8c2;
+}
+
+.forecast-card .forecast-more-info {
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.forecast-card .forecast-more-info.active,
+.forecast-card .forecast-more-info:hover {
+  opacity: 1;
+  color: #ff6b09;
+}
+
+.forecast-card .forecast-day-of-week.active {
+  opacity: 1;
+  color: #ff6b09;
+}
+
+.five-day-show-chart {
+  /* display: none;  Removed: visibility will be controlled by JS adding/removing .hidden class */
+  display: flex; /* This should be its visible state */
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* или другое значение для отступа снизу */
+  margin-bottom: 40px;
+}
+
+.show-chart-link {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 14px;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #ff6b09;
+  gap: 6px;
+}
+
+.show-chart-link svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* === СТИЛІ ДЛЯ ГРАФІКА ПОГОДИ === */
+.chart-section {
+  border-radius: 34px;
+  width: 100%;
+  max-width: 1248px;
+  min-height: 540px;
+  box-shadow: 0 8px 43px 0 rgba(16, 33, 54, 0.6);
+  background: rgba(16, 33, 54, 0.8);
+  margin: 20px auto 40px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.hide-chart-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 400;
+  font-size: 14px;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #ff6b09;
+}
+
+.hide-chart-link .hide-chart-icon {
+  width: 28px;
+  height: 28px;
+  transform: rotate(180deg); /* Повертаємо іконку вгору */
+}
+
+/* === СТИЛІ ДЛЯ ЛЕГЕНДИ ГРАФІКА (MOBILE FIRST) === */
+.chart-legend-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin: 0 0 20px 20px;
+  max-width: 1034px;
+}
+
+.chart-legend-wrapper p {
+  font-size: 14px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.chart-legend {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.chart-legend-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 14px;
+  gap: 8px;
+}
+
+.chart-legend-item input {
+  display: none; /* Ховаємо стандартний чекбокс */
+}
+
+.chart-legend-item .legend-color-box {
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.chart-legend-item .legend-color-box.temp {
+  background-color: #ff6b09;
+}
+.chart-legend-item .legend-color-box.humidity {
+  background-color: #0000ff;
+}
+.chart-legend-item .legend-color-box.wind {
+  background-color: #e0e024;
+}
+.chart-legend-item .legend-color-box.pressure {
+  background-color: #00ff00;
+}
+
+.chart-legend-item input:not(:checked) + .legend-color-box {
+  background-color: transparent; /* Робимо прозорим, якщо не вибрано */
+}
+
+/* Стилі для одиниць виміру в легенді графіка */
+.chart-legend-item .unit {
+  opacity: 0.54;
+}
+
+.unit.unit-temp {
+  color: #ff6b09;
+}
+
+.unit.unit-humidity {
+  color: #0906eb;
+}
+
+.unit.unit-wind {
+  color: #ea9a05;
+}
+
+.unit.unit-pressure {
+  color: #067806;
+}
+
+/* Стиль для неактивних (перекреслених) елементів легенди */
+.chart-legend-item.disabled span {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.chart-wrapper {
+  flex-grow: 1;
+  position: relative;
+  width: 100%;
+  max-width: 1034px;
+  height: 412px;
+  margin: 0 auto;
+}
+
+/* Ensure chart-canvas-container behaves consistently */
+.chart-canvas-container {
+  position: relative; /* Needed for Chart.js to correctly size the canvas */
+  width: 100%;
+  height: 100%;
+}
+
+#weather-chart {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#chart-custom-scrollbar {
+  width: 250px;
+  height: 2px;
+  margin: 10px auto 0;
+  margin-bottom: 32px;
+}
+
+/* Tablet styles */
+@media screen and (min-width: 768px) {
+  .weather-app.five-day-layout-active {
+    min-height: 75vh; /* Задаємо висоту для планшетів */
+  }
+
+  #hourly-forecast-container {
+    margin: 0 auto;
+  }
+
+  #forecast-header-city {
+    font-size: 28px;
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
+  }
+
+  .forecast-min-max .temp-value {
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .forecast-min-max .label {
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.55;
+  }
+
+  .forecast-card .forecast-day-of-week {
+    font-size: 14px;
+  }
+
+  .forecast-card .forecast-date {
+    font-size: 18px;
+  }
+
+  .date-time-info {
+    min-width: 600px;
+    min-height: 250px;
+    margin: 0 auto;
+    max-width: 680px;
+  }
+
+  .header-search {
+    max-width: 731px;
+  }
+
+  .search-bar {
+    max-width: 700px;
+    margin-left: 16px;
+  }
+
+  .search-bar input {
+    max-width: 660px;
+  }
+
+  .city-tags {
+    max-width: 600px;
+    margin-left: 48px;
+  }
+
+  .sun-times {
+    font-size: 18px;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .date {
+    font-size: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto; /* Убираем фиксированную ширину */
+  }
+
+  .month-time-container {
+    top: 50%;
+    left: 52%;
+    transform: translateX(-50%);
+    width: auto;
+  }
+  .month,
+  .time {
+    font-size: 18px;
+  }
+
+  .weather-display {
+    margin: 0 auto;
+    max-width: 680px;
+  }
+
+  .current-weather {
+    width: 100%;
+    min-width: 680px;
+  }
+
+  .temperature-and-minmax {
+    flex-direction: column; /* Изменяем на строку */
+    align-items: center; /* Центрируем по горизонтали */
+    justify-content: center; /* Центрируем по горизонтали */
+    width: 100%;
+  }
+
+  .min-max {
+    margin-left: 0;
+  }
+
+  .quote {
+    margin: 0 auto;
+    min-width: 600px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+
+  #quote-text {
+    font-size: 22px;
+  }
+
+  .romb {
+    border: 4px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    width: 197px;
+    height: 197px;
+  }
+
+  .romb-left {
+    top: -5%;
+    right: 93%;
+  }
+
+  .romb-right {
+    top: -2%;
+    left: 85%;
+  }
+  .five-day-header {
+    gap: 24px;
+  }
+
+  .five-day-forecast-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: visible;
+    justify-content: space-around;
+  }
+  .forecast-scroll-arrow {
+    display: none;
+  }
+  /* Адаптація для планшетів та десктопів (min-width: 768px) */
+  .chart-legend-wrapper {
+    flex-direction: row; /* Повертаємо горизонтальне відображення */
+    align-items: center;
+    justify-content: center; /* Центруємо */
+    gap: 15px;
+    padding-left: 0; /* Скидаємо відступ */
+  }
+
+  .chart-legend {
+    flex-direction: row; /* Повертаємо горизонтальне відображення */
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap; /* Дозволяємо переносити елементи на новий рядок */
+  }
+}
+
+/* Desktop styles */
+@media screen and (min-width: 1280px) {
+  .weather-app.five-day-layout-active {
+    min-height: 65vh; /* Задаємо висоту для планшетів */
+  }
+
+  .header-search {
+    max-width: 822px;
+    margin: 0 auto; /* Центрируем внутри weather-app */
+    align-items: center;
+  }
+
+  .city-tags {
+    align-self: flex-start;
+    margin-left: 96px;
+  }
+
+  .weather-app {
+    padding: 0;
+  }
+
+  .weather-display {
+    margin: 0;
+    min-width: 411px;
+    max-width: 411px;
+  }
+
+  #today-view-container {
+    margin-top: 80px;
+    align-items: flex-end; /* Вирівнюємо по правому краю */
+  }
+
+  .current-weather {
+    border-radius: 34px 0 0 34px;
+    box-shadow: 0 8px 43px 0 rgba(16, 33, 54, 0.6);
+    width: 100%;
+    min-width: 411px;
+  }
+
+  .forecast-tabs {
+    margin-right: 16px;
+  }
+
+  .tab-button {
+    width: 182px;
+  }
+
+  .weather-info-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto; /* Центрируем внутри weather-app */
+    margin-top: 85px;
+  }
+
+  .date-time-info {
+    height: 264px;
+    border-radius: 0 34px 0 0;
+    margin: 0;
+  }
+
+  .date {
+    font-size: 90px;
+    left: 16px;
+    top: 100px;
+    transform: translateY(-50%);
+    margin-bottom: 16px;
+  }
+
+  .day-of-week {
+    font-size: 90px;
+  }
+
+  .month-time-container {
+    top: 178px;
+    left: 10px;
+    transform: translateY(-50%);
+    padding-left: 20px;
+  }
+
+  .sun-times {
+    margin-left: 136px;
+    top: 168px;
+    transform: translateX(-50%);
+  }
+
+  .quote {
+    position: absolute;
+    right: 32px;
+    bottom: 50px;
+    margin-top: 0;
+    align-self: auto;
+    min-width: 400px;
+  }
+
+  .romb-left {
+    top: 106px;
+    left: -42px;
+  }
+
+  .romb-right {
+    top: -160px;
+    left: 83%;
+  }
+
+  .five-day-header {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 138px;
+  }
+}
+
+/* Адаптивність для графіка */
+@media screen and (max-width: 1279px) {
+  .chart-section {
+    width: 100%;
+    max-width: 768px; /* Планшетна версія */
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .chart-section {
+    height: auto;
+    padding: 15px;
+    overflow-x: visible;
+  }
+
+  .chart-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    height: 350px;
+    margin: 0 auto;
+  }
+  .chart-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  .chart-wrapper {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Контейнер для холста з фіксованою шириною */
+  .chart-canvas-container {
+    position: relative;
+    width: 500px;
+    height: 100%;
+  }
+
+  /* Скидаємо примусову ширину з самого холста */
+  #weather-chart {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  #chart-custom-scrollbar {
+    display: block !important;
+  }
+}
