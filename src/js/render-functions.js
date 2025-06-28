@@ -495,6 +495,10 @@ export function hideHourlyForecast() {
   const container = document.getElementById('hourly-forecast-container');
   if (container) {
     container.classList.add('hidden');
-    container.innerHTML = ''; // Clearing content might still be desired
+
+    const wrapper = container.querySelector('.hourly-forecast-cards-wrapper');
+    if (wrapper) {
+      wrapper.innerHTML = '';
+    }
   }
 }
