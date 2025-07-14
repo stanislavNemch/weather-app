@@ -875,10 +875,6 @@
 
 /* Tablet styles */
 @media screen and (min-width: 768px) {
-  #hourly-forecast-container {
-    margin: 0 auto;
-  }
-
   #forecast-header-city {
     font-size: 28px;
     position: static;
@@ -1037,6 +1033,10 @@
 
 /* Desktop styles */
 @media screen and (min-width: 1280px) {
+  #hourly-forecast-container {
+    margin: 0 auto;
+  }
+
   .weather-app.five-day-layout-active {
     min-height: 65vh;
   }
