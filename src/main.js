@@ -220,19 +220,21 @@ async function fetchAndDisplayFiveDayForecast(city) {
 }
 
 function showTodayView() {
-  weatherApp.classList.remove('five-day-layout-active');
-  if (todayTabTodayView.classList.contains('active')) return;
-  todayTabTodayView.classList.add('active');
-  fiveDaysTabTodayView.classList.remove('active');
-  todayTabFiveDayView.classList.add('active');
-  fiveDaysTabFiveDayView.classList.remove('active');
-  fiveDayViewContainer.classList.add('hidden');
-  todayViewContainer.classList.remove('hidden'); // Assuming flex is handled by CSS or default
-  hideHourlyForecast();
   fetchAndDisplayWeather(currentCity);
-  if (chartSection) chartSection.classList.add('hidden');
-  if (showChartContainer) showChartContainer.classList.add('hidden');
-  if (forecastMainSection) forecastMainSection.classList.remove('hidden'); // Assuming block is handled by CSS or default
+
+  if (todayViewContainer.classList.contains('hidden')) {
+    weatherApp.classList.remove('five-day-layout-active');
+    todayTabTodayView.classList.add('active');
+    fiveDaysTabTodayView.classList.remove('active');
+    todayTabFiveDayView.classList.add('active');
+    fiveDaysTabFiveDayView.classList.remove('active');
+    fiveDayViewContainer.classList.add('hidden');
+    todayViewContainer.classList.remove('hidden');
+    hideHourlyForecast();
+    if (chartSection) chartSection.classList.add('hidden');
+    if (showChartContainer) showChartContainer.classList.add('hidden');
+    if (forecastMainSection) forecastMainSection.classList.remove('hidden');
+  }
 }
 
 function showFiveDayView() {
@@ -441,16 +443,18 @@ document.addEventListener('DOMContentLoaded', () => {
       // Рендеримо контент
       const dayData = JSON.parse(moreInfoLink.dataset.dayData);
       renderHourlyForecast(dayData, moreInfoLink.dataset.dateString);
-      // Replaced attachHourlyScrollbarEvents with setupCustomScrollbar
-      setTimeout(() => {
-        setupCustomScrollbar({
-          wrapperSelector:
-            '#hourly-forecast-container .hourly-forecast-cards-wrapper',
-          scrollbarId: 'hourly-custom-scrollbar',
-          thumbId: 'hourly-scrollbar-thumb',
-          scrollbarVisibleWidth: 248,
-        });
-      }, 0);
+
+      if (window.innerWidth <= 1279) {
+        setTimeout(() => {
+          setupCustomScrollbar({
+            wrapperSelector:
+              '#hourly-forecast-container .hourly-forecast-cards-wrapper',
+            scrollbarId: 'hourly-custom-scrollbar',
+            thumbId: 'hourly-scrollbar-thumb',
+            scrollbarVisibleWidth: 248,
+          });
+        }, 0);
+      }
     });
   }
 
