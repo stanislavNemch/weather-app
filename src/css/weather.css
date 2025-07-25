@@ -455,7 +455,7 @@
   font-size: 18px;
   font-weight: 700;
   position: absolute;
-  top: 32px; /* подберите нужное значение, чтобы заголовок был над карточками */
+  top: 16px; /* подберите нужное значение, чтобы заголовок был над карточками */
   left: 50%;
   transform: translateX(-50%);
   width: max-content;
@@ -470,15 +470,15 @@
 
 .five-day-forecast-container {
   min-height: 307px;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
   /* MOBILE-FIRST СТИЛІ ДЛЯ ГОРИЗОНТАЛЬНОГО СКРОЛУ */
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 8px;
   overflow-x: auto;
   overflow-y: hidden;
-  gap: 32px;
   scroll-behavior: smooth;
 }
 .five-day-forecast-container::-webkit-scrollbar {
@@ -541,7 +541,23 @@
   gap: 12px;
   text-align: center;
   color: var(--text-light);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  width: 160px;
+  padding: 12px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.forecast-card:hover,
+.forecast-card:focus {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.forecast-card:active {
+  border-color: #ff6b09;
+}
+
 .forecast-card .forecast-day-of-week {
   font-weight: 400;
   font-size: 12px;
@@ -635,6 +651,14 @@
   color: var(--text-light);
   min-width: 120px;
   padding: 16px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hourly-card:hover,
+.hourly-card:focus {
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-color: #ff6b09;
 }
 
 .hourly-card .hourly-time {
