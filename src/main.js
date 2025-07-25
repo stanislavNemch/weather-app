@@ -402,6 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
       lastActiveMoreInfo.classList.remove('active');
       const prevCard = lastActiveMoreInfo.closest('.forecast-card');
       if (prevCard) {
+        prevCard.classList.remove('active');
         const dayOfWeek = prevCard.querySelector('.forecast-day-of-week');
         if (dayOfWeek) {
           dayOfWeek.classList.remove('active');
@@ -433,6 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Встановлюємо нову підсвітку
       moreInfoLink.classList.add('active');
       if (forecastCard) {
+        forecastCard.classList.add('active');
         forecastCard
           .querySelector('.forecast-day-of-week')
           .classList.add('active');
