@@ -59,6 +59,8 @@ export default defineConfig(({ command }) => {
               safelist: {
                 standard: [
                   'loaded',
+                  'view-transition-out',
+                  'view-transition-in',
                   'is-active',
                   'is-visible',
                   'chart-legend-item',
