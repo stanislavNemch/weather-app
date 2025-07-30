@@ -58,6 +58,7 @@ export default defineConfig(({ command }) => {
               content: ['./src/**/*.html', './src/js/**/*.js'],
               safelist: {
                 standard: [
+                  'loaded',
                   'is-active',
                   'is-visible',
                   'chart-legend-item',
