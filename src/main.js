@@ -39,6 +39,7 @@ const forecastMainSection = document.querySelector('.forecast-main-section');
 let cities = JSON.parse(localStorage.getItem('weatherCities')) || ['Kyiv'];
 let currentCity = cities[0] || 'Kyiv';
 let fiveDayForecastData = null;
+let isViewSwitching = false;
 
 function setupCustomScrollbar(config) {
   const {
@@ -181,7 +182,7 @@ function setupCustomScrollbar(config) {
 
   // Initial visual setup
   // Use setTimeout to ensure layout is stable, especially if content is dynamic
-  setTimeout(updateThumbVisuals, 0);
+  setTimeout(updateThumbVisuals, 500);
 }
 
 function showLoader() {
@@ -191,11 +192,24 @@ function hideLoader() {
   loaderElement.classList.add('hidden');
 }
 
-async function fetchAndDisplayWeather(city) {
+async function fetchAndDisplayWeather(city, withAnimation = false) {
+  if (withAnimation && weatherApp) {
+    // Скидаємо стан, щоб анімація могла запуститися знову
+    weatherApp.classList.remove('loaded');
+  }
+
   showLoader();
   try {
     const weatherData = await getWeatherData(city);
-    if (weatherData) updateWeatherUI(weatherData, city);
+    if (weatherData) {
+      updateWeatherUI(weatherData, city);
+    }
+    if (withAnimation && weatherApp) {
+      // Примусово змушуємо браузер побачити скинутий стан перед анімацією
+      void weatherApp.offsetHeight;
+      // Запускаємо анімацію появи
+      weatherApp.classList.add('loaded');
+    }
   } catch (error) {
     console.error(error);
   } finally {
@@ -210,7 +224,7 @@ async function fetchAndDisplayFiveDayForecast(city) {
     if (forecastData) {
       fiveDayForecastData = forecastData;
       renderFiveDayForecast(forecastData);
-      if (showChartContainer) showChartContainer.classList.remove('hidden'); // Assuming flex is handled by CSS or default
+      if (showChartContainer) showChartContainer.classList.remove('hidden');
     }
   } catch (error) {
     showNotification(`Не вдалося отримати прогноз для міста ${city}.`, 'error');
@@ -220,32 +234,95 @@ async function fetchAndDisplayFiveDayForecast(city) {
 }
 
 function showTodayView() {
-  fetchAndDisplayWeather(currentCity);
+  if (isViewSwitching) return;
 
-  if (todayViewContainer.classList.contains('hidden')) {
-    weatherApp.classList.remove('five-day-layout-active');
-    todayTabTodayView.classList.add('active');
-    fiveDaysTabTodayView.classList.remove('active');
-    todayTabFiveDayView.classList.add('active');
-    fiveDaysTabFiveDayView.classList.remove('active');
-    fiveDayViewContainer.classList.add('hidden');
-    todayViewContainer.classList.remove('hidden');
-    hideHourlyForecast();
-    if (chartSection) chartSection.classList.add('hidden');
-    if (showChartContainer) showChartContainer.classList.add('hidden');
-    if (forecastMainSection) forecastMainSection.classList.remove('hidden');
+  // If already on today view, just refresh data.
+  if (!todayViewContainer.classList.contains('hidden')) {
+    fetchAndDisplayWeather(currentCity, true);
+    return;
   }
+
+  isViewSwitching = true;
+
+  // Update tabs and layout state immediately
+  weatherApp.classList.remove('five-day-layout-active');
+  todayTabTodayView.classList.add('active');
+  fiveDaysTabTodayView.classList.remove('active');
+  todayTabFiveDayView.classList.add('active');
+  fiveDaysTabFiveDayView.classList.remove('active');
+
+  // Animate out the 5-day view
+  fiveDayViewContainer.classList.add('view-transition-out');
+
+  fiveDayViewContainer.addEventListener(
+    'animationend',
+    () => {
+      fiveDayViewContainer.classList.add('hidden');
+      fiveDayViewContainer.classList.remove('view-transition-out');
+
+      // Show and animate in the today view
+      todayViewContainer.classList.remove('hidden');
+      todayViewContainer.classList.add('view-transition-in');
+      todayViewContainer.addEventListener(
+        'animationend',
+        () => {
+          todayViewContainer.classList.remove('view-transition-in');
+          isViewSwitching = false; // Release the lock
+        },
+        { once: true }
+      );
+    },
+    { once: true }
+  );
+
+  // Update other UI elements
+  hideHourlyForecast();
+  if (chartSection) chartSection.classList.add('hidden');
+  if (showChartContainer) showChartContainer.classList.add('hidden');
+  if (forecastMainSection) forecastMainSection.classList.remove('hidden');
+
+  // Fetch data for the new view
+  fetchAndDisplayWeather(currentCity, false);
 }
 
 function showFiveDayView() {
+  if (isViewSwitching || fiveDaysTabTodayView.classList.contains('active')) {
+    return;
+  }
+  isViewSwitching = true;
+
+  // Update tabs and layout state immediately
   weatherApp.classList.add('five-day-layout-active');
-  if (fiveDaysTabTodayView.classList.contains('active')) return;
   todayTabTodayView.classList.remove('active');
   fiveDaysTabTodayView.classList.add('active');
   todayTabFiveDayView.classList.remove('active');
   fiveDaysTabFiveDayView.classList.add('active');
-  todayViewContainer.classList.add('hidden');
-  fiveDayViewContainer.classList.remove('hidden'); // Assuming flex is handled by CSS or default
+
+  // Animate out the today view
+  todayViewContainer.classList.add('view-transition-out');
+
+  todayViewContainer.addEventListener(
+    'animationend',
+    () => {
+      todayViewContainer.classList.add('hidden');
+      todayViewContainer.classList.remove('view-transition-out');
+
+      // Show and animate in the 5-day view
+      fiveDayViewContainer.classList.remove('hidden');
+      fiveDayViewContainer.classList.add('view-transition-in');
+      fiveDayViewContainer.addEventListener(
+        'animationend',
+        () => {
+          fiveDayViewContainer.classList.remove('view-transition-in');
+          isViewSwitching = false; // Release the lock
+        },
+        { once: true }
+      );
+    },
+    { once: true }
+  );
+
+  // Fetch data for the new view
   fetchAndDisplayFiveDayForecast(currentCity);
 }
 
@@ -274,7 +351,7 @@ function showChart() {
 
 function hideChart() {
   if (chartSection) chartSection.classList.add('hidden');
-  if (showChartContainer) showChartContainer.classList.remove('hidden'); // Assuming flex is handled by CSS or default
+  if (showChartContainer) showChartContainer.classList.remove('hidden');
 }
 
 function handleCityClick(city) {
@@ -286,7 +363,7 @@ function handleCityClick(city) {
     hideChart();
     fetchAndDisplayFiveDayForecast(city);
   } else {
-    fetchAndDisplayWeather(city);
+    fetchAndDisplayWeather(city, true);
   }
 }
 
@@ -354,7 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const timeElement = document.querySelector('.date-time-info .time');
   renderCityTags(cities, handleCityClick, handleCityRemove);
   updateBackground(currentCity);
-  fetchAndDisplayWeather(currentCity);
+  fetchAndDisplayWeather(currentCity, true); // Початкове завантаження з анімацією
   updateQuoteDisplay();
 
   if (timeElement) {
@@ -470,7 +547,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       showChart();
       // оновлюємо селектор для інтерактивного скролу
-      // Replaced enableInteractiveScrollbar with setupCustomScrollbar
+      // Заміна enableInteractiveScrollbar на setupCustomScrollbar
       setupCustomScrollbar({
         wrapperSelector: '#chart-wrapper',
         scrollbarId: 'chart-custom-scrollbar',

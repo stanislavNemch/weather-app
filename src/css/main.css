@@ -190,3 +190,69 @@ body::before {
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
   }
 }
+/* Стили для анимации переключения видов */
+.view-transition-out {
+  animation: fadeOut 0.3s ease-out forwards;
+  pointer-events: none; /* Отключаем взаимодействие с уходящим блоком */
+}
+
+.view-transition-in {
+  animation: fadeIn 0.3s ease-in forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Стили для анимации при загрузке страницы */
+.weather-display,
+.date-time-info {
+  opacity: 0;
+  transform: translateY(20px);
+  /* Плавный переход */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Когда приложение загружено, показываем блоки */
+.weather-app.loaded .weather-display,
+.weather-app.loaded .date-time-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Добавляем небольшую задержку для второго блока для красивого эффекта */
+.weather-app.loaded .date-time-info {
+  transition-delay: 0.2s;
+}
+
+/* Анимация для появления блока почасового прогноза */
+#hourly-forecast-container {
+  /* Начальное состояние для анимации (невидимый и сдвинутый) */
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+#hourly-forecast-container:not(.hidden) {
+  /* Конечное состояние (видимый и на своем месте) и сама анимация */
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
